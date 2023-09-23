@@ -27,7 +27,7 @@ namespace POS_System.ViewModels
             set
             {
                 _id = value;
-                OnpropertyChanged(nameof(Id));
+                OnPropertyChanged(nameof(Id));
             }
 
 
@@ -41,7 +41,7 @@ namespace POS_System.ViewModels
             set
             {
                 _errorMessage = value;
-                OnpropertyChanged(nameof(ErrorMessage));
+                OnPropertyChanged(nameof(ErrorMessage));
             }
 
 
@@ -55,7 +55,7 @@ namespace POS_System.ViewModels
             set
             {
                 _success = value;
-                OnpropertyChanged(nameof(Success));
+                OnPropertyChanged(nameof(Success));
             }
 
 
@@ -67,7 +67,7 @@ namespace POS_System.ViewModels
         //Constructor
         public LoginScreenViewModel()
         {
-            LoginCommand = new ViewModelCommand(ExecuteLoginCommad, CanExecuteLoginCommand);
+            LoginCommand = new RalayCommand(ExecuteLoginCommad, CanExecuteLoginCommand);
         }
 
         //Here is the login validation 

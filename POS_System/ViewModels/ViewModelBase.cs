@@ -19,3 +19,4 @@ namespace POS_System.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
+}
