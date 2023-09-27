@@ -1,4 +1,5 @@
-﻿using System;
+﻿using POS_System.Database;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,8 +14,10 @@ namespace POS_System.ViewModels
         //binding the View and ViewModel
         //Howard: skip password for now. will be completed later
         private int _id;
+        private string _password;
         private string _errorMessage;
-        private bool _success = true;
+        private bool _canLogin = true;
+        private DatabaseHelper _dbHelper;
 
         //Properties
         //add propertyChange to notify the value has changed 
@@ -32,6 +35,20 @@ namespace POS_System.ViewModels
 
 
         }
+
+        public string Password
+        {
+            get
+            {
+                return _password;
+            }
+            set
+            {
+                _password = value;
+                OnPropertyChanged(nameof(Password));
+            }
+        }
+
         public string ErrorMessage
         {
             get
@@ -46,16 +63,16 @@ namespace POS_System.ViewModels
 
 
         }
-        public bool Success
+        public bool CanLogin
         {
             get
             {
-                return _success;
+                return _canLogin;
             }
             set
             {
-                _success = value;
-                OnPropertyChanged(nameof(Success));
+                _canLogin = value;
+                OnPropertyChanged(nameof(CanLogin));
             }
 
 
@@ -67,21 +84,42 @@ namespace POS_System.ViewModels
         //Constructor
         public LoginScreenViewModel()
         {
+            _dbHelper = new DatabaseHelper("yourServer", "yourDatabase", "yourUserID", "yourPassword");
             LoginCommand = new RalayCommand(ExecuteLoginCommad, CanExecuteLoginCommand);
         }
 
-        //Here is the login validation 
         
+        //Logic to check if login can be performed like fields are not empty 
         private bool CanExecuteLoginCommand(object obj)
         {
-            throw new NotImplementedException();
+            return Id != 0 && !string.IsNullOrWhiteSpace(Password);
 
 
         }
 
+        //Here is the login validation 
         private void ExecuteLoginCommad(object obj)
         {
-            throw new NotImplementedException();
+            // Replace with your actual DB connection parameters
+            string server = "your_server";
+            string database = "your_database";
+            string uid = "your_user_id";
+            string dbPassword = "your_password";
+
+            using (var dbHelper = new DatabaseHelper(server, database, uid, dbPassword))
+            {
+                if (dbHelper.AuthenticateUser(Id.ToString(), Password))
+                {
+                    _canLogin = true;
+                    ErrorMessage = "Successfully Logged In!";
+                    //TODO: Navigate to next page
+                }
+                else
+                {
+                    _canLogin = false;
+                    ErrorMessage = "Invalid credentials.";
+                }
+            }
         }
     }
 }

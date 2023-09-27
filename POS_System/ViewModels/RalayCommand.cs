@@ -7,6 +7,7 @@ using System.Windows.Input;
 
 namespace POS_System.ViewModels
 {
+    //To binding the action button on .xaml
     public class RalayCommand : ICommand
     {
         public event EventHandler? CanExecuteChanged;
