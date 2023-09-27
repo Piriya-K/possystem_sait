@@ -101,10 +101,10 @@ namespace POS_System.ViewModels
         private void ExecuteLoginCommad(object obj)
         {
             // Replace with your actual DB connection parameters
-            string server = "your_server";
-            string database = "your_database";
-            string uid = "your_user_id";
-            string dbPassword = "your_password";
+            string server = "localhost";
+            string database = "pos_db";
+            string uid = "1521";
+            string dbPassword = "password";
 
             using (var dbHelper = new DatabaseHelper(server, database, uid, dbPassword))
             {
