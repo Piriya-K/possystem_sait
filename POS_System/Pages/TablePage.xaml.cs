@@ -34,6 +34,15 @@ namespace POS_System.Pages
             this.Close();
         }
 
+        private void Open_Table(object sender, RoutedEventArgs e)
+        {
+            // Go to MenuPage.xaml when they double click on Table
+            MenuPage menuPage = new MenuPage();
+            menuPage.Show();
+            this.Close();
+        }
+
+
 
     }
 }
