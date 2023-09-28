@@ -14,15 +14,11 @@ using System.Windows.Shapes;
 
 namespace POS_System.Pages
 {
-    /// <summary>
-    /// Interaction logic for TablePage.xaml
-    /// </summary>
     public partial class TablePage : Window
     {
         public TablePage()
         {
             InitializeComponent();
-   
         }
 
         private void LogoutButton_Click(object sender, RoutedEventArgs e)
@@ -41,8 +37,5 @@ namespace POS_System.Pages
             menuPage.Show();
             this.Close();
         }
-
-
-
     }
 }

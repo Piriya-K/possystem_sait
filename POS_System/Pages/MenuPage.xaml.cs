@@ -31,7 +31,6 @@ namespace POS_System.Pages
             tablePage.Show();
             this.Close();
 
-
         }
     }
 }
