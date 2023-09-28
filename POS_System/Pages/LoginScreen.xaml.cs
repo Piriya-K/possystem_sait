@@ -1,4 +1,5 @@
 ﻿using POS_System.Database;
+using POS_System.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,6 +26,7 @@ namespace POS_System.Pages
         public LoginScreen()
         {
             InitializeComponent();
+            DataContext = new LoginScreenViewModel();
             db = new DatabaseHelper("localhost", "pos_db", "root", "password");
         }
 
