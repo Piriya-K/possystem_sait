@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Xml.Linq;
 
 namespace POS_System.Pages
 {
@@ -37,7 +38,8 @@ namespace POS_System.Pages
             {
                 // Assuming the table number is the part of the button's name after "table"
                 string tableName = button.Name; // get the name of the button
-                string tableNumber = tableName.Substring(5); // remove the first 5 characters ("table")
+                int index = tableName.IndexOf('_'); //get the index number after "_"
+                string tableNumber = tableName.Substring(index + 1);// remove the first 5 characters ("table")
                 MenuPage menuPage = new MenuPage(tableNumber); // pass the table number as a string
                 menuPage.Show();
                 this.Close();
