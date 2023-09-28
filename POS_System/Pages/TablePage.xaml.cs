@@ -32,10 +32,18 @@ namespace POS_System.Pages
 
         private void Open_Table(object sender, RoutedEventArgs e)
         {
-            // Go to MenuPage.xaml when they double click on Table
-            MenuPage menuPage = new MenuPage();
-            menuPage.Show();
-            this.Close();
+            Button button = sender as Button;
+            if (button != null)
+            {
+                // Assuming the table number is the part of the button's name after "table"
+                string tableName = button.Name; // get the name of the button
+                string tableNumber = tableName.Substring(5); // remove the first 5 characters ("table")
+                MenuPage menuPage = new MenuPage(tableNumber); // pass the table number as a string
+                menuPage.Show();
+                this.Close();
+            }
         }
+
+
     }
 }

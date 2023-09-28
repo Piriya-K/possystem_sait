@@ -80,7 +80,7 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Text="Table Number:" VerticalAlignment="Center" Margin="0,5" Foreground="Orange"/>
-                <TextBox Text="1" VerticalAlignment="Center" IsReadOnly="True" Grid.Column="1" Foreground="Orange" Background="#FF454545"  BorderBrush="Orange" Margin="10,0,-10,0" />
+                <TextBox x:Name="TableNumberTextBox" Text="1" VerticalAlignment="Center" IsReadOnly="True" Grid.Column="1" Foreground="Orange" Background="#FF454545"  BorderBrush="Orange" Margin="10,0,-10,0" TextChanged="TextBox_TextChanged" />
             </Grid>
             <Grid>
                 <Grid.ColumnDefinitions>

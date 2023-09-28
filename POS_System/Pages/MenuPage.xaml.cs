@@ -24,12 +24,27 @@ namespace POS_System.Pages
             InitializeComponent();
         }
 
+        public MenuPage(string tableNumber)
+        {
+            InitializeComponent();
+            TableNumberTextBox.Text = tableNumber;
+        }
+
+
+
         private void Back_to_TablePage(object sender, RoutedEventArgs e)
         {
             // Go to TablePage.xaml when they click on Back button
             TablePage tablePage = new TablePage();
             tablePage.Show();
             this.Close();
+
+        }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            //Change number to correspoding table.
+            TablePage tablePage = new TablePage();
 
         }
     }
