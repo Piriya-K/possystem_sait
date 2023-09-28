@@ -38,5 +38,12 @@ namespace POS_System.Pages
         {
 
         }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            TablePage tablePage = new TablePage();
+            tablePage.Show();
+            this.Close();
+        }
     }
 }

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -45,6 +46,19 @@ namespace POS_System.Pages
         {
             //Change number to correspoding table.
             TablePage tablePage = new TablePage();
+
+        }
+
+        private void TextBox_TextChanged_1(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void PaymentButton(object sender, RoutedEventArgs e)
+        {
+            PaymentPage paymentPage = new PaymentPage();
+            paymentPage.Show();
+            this.Close();
 
         }
     }
