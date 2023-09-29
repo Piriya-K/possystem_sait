@@ -31,16 +31,33 @@ namespace POS_System.Pages
             this.Close();
         }
 
+        //Handle table number, order number, order type
         private void Open_Table(object sender, RoutedEventArgs e)
         {
             Button button = sender as Button;
             if (button != null)
             {
-                // Assuming the table number is the part of the button's name after "table"
                 string tableName = button.Name; // get the name of the button
+                string orderType = button.Name; //get the name of button
+
                 int index = tableName.IndexOf('_'); //get the index number after "_"
+
+                // Show table number or take-our order number
                 string tableNumber = tableName.Substring(index + 1);// remove the first 5 characters ("table")
-                MenuPage menuPage = new MenuPage(tableNumber); // pass the table number as a string
+                orderType = tableName.Substring(0, index);
+
+                String Type = "";
+                if (orderType.Equals("table"))
+                {
+                    Type = "Dine-In"; 
+                } 
+                else if (orderType.Equals ("takeOut"))
+                {
+                    Type = "Take-Out";
+                }
+
+
+                MenuPage menuPage = new MenuPage(tableNumber, Type); // pass the table number as a string
                 menuPage.Show();
                 this.Close();
             }

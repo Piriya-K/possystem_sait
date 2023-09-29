@@ -93,10 +93,11 @@
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="16*"/>
+                    <ColumnDefinition Width="29*"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock Text="Type:" VerticalAlignment="Center" Margin="0,5" Foreground="Orange"/>
-                <TextBox Text="Dining" VerticalAlignment="Center" IsReadOnly="True" Grid.Column="1" Foreground="Orange" Background="#FF454545"  BorderBrush="Orange" Margin="10,0,-10,0" TextChanged="TextBox_TextChanged_1"/>
+                <TextBlock Text="Type:" VerticalAlignment="Center" Foreground="Orange"/>
+                <TextBox x:Name="TypeTextBox" VerticalAlignment="Center" IsReadOnly="True" Grid.Column="1" Foreground="Orange" Background="#FF454545"  BorderBrush="Orange" Margin="10,0,-10,0" TextChanged="OrderTypeTextBox" Grid.ColumnSpan="2"/>
             </Grid>
             <ListBox x:Name="OrdersListBox" Width="297" Height="313"  Background="#FF454545"  BorderBrush="Orange">
                 <ListBox.ItemTemplate>

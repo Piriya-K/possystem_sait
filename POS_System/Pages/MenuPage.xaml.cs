@@ -25,10 +25,11 @@ namespace POS_System.Pages
             InitializeComponent();
         }
 
-        public MenuPage(string tableNumber)
+        public MenuPage(string tableNumber, string Type)
         {
             InitializeComponent();
             TableNumberTextBox.Text = tableNumber;
+            TypeTextBox.Text = Type;
         }
 
 
@@ -49,16 +50,17 @@ namespace POS_System.Pages
 
         }
 
-        private void TextBox_TextChanged_1(object sender, TextChangedEventArgs e)
-        {
-
-        }
-
         private void PaymentButton(object sender, RoutedEventArgs e)
         {
             PaymentPage paymentPage = new PaymentPage();
             paymentPage.Show();
             this.Close();
+
+        }
+
+        private void OrderTypeTextBox(object sender, TextChangedEventArgs e)
+        {
+            TablePage tablePage = new TablePage();
 
         }
     }
