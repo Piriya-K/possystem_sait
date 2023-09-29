@@ -52,9 +52,17 @@ namespace POS_System.Pages
                 MessageBox.Show("Invalid userid or password. Please try again.");
             }
         }
-    
 
-    private void id_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+        private void OnKeyDownHandler(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                btnSubmit_Click(sender, e);
+            }
+        }
+
+
+        private void id_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
         {
 
         }
