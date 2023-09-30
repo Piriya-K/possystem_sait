@@ -14,11 +14,10 @@
         <!-- Dark Gray Background -->
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto" MinHeight="58"/>
-            <RowDefinition Height="Auto" MinHeight="10"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+
         </Grid.RowDefinitions>
 
         <!-- Buttons -->
@@ -30,14 +29,10 @@
         </Grid.ColumnDefinitions>
 
         <!-- item button list -->
-        <StackPanel x:Name="FoodItemsPanel" Grid.Column="2" Grid.Row="4" 
-            HorizontalAlignment="Center" VerticalAlignment="Top" Width="282" Height="0"/>
-
-        <!-- Update TabControl -->
-        <TabControl Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Margin="316,0,0,185" Grid.RowSpan="3" >
-            <!-- Set it to the next row -->
-            <!-- ... rest of the TabControl definition -->
-        </TabControl>
+        <Grid>
+            <!-- Container to hold the dynamic buttons -->
+            <StackPanel Name="buttonPanel" Orientation="Vertical" Margin="414,66,-616,-362"/>
+        </Grid>
 
 
         <!--Buttons-->
@@ -51,8 +46,8 @@
             </Viewbox>
         </Button>
         <Button Content="Split Bill" HorizontalAlignment="Left" Background="Orange" BorderBrush="#FF4C4B56" FontSize="14" FontFamily="Verdana" FontWeight="Bold" Height="36" Margin="14,120,0,0" VerticalAlignment="Top" Width="73" Grid.Row="4"/>
-        <Button Content="Print Bill" HorizontalAlignment="Left" Background="Orange" BorderBrush="#FF4C4B56" FontSize="14" FontFamily="Verdana" FontWeight="Bold" Height="36" Margin="14,230,0,0" VerticalAlignment="Top" Width="73" Grid.Row="4"/>
-        <Button Content="Payment" HorizontalAlignment="Left" Background="Orange" BorderBrush="#FF4C4B56" FontSize="14" FontFamily="Verdana" FontWeight="Bold" Height="36" VerticalAlignment="Top" Width="73" Grid.Row="4" Margin="17,271,0,0" Click="PaymentButton"/>
+        <Button Content="Print Bill" HorizontalAlignment="Left" Background="Orange" BorderBrush="#FF4C4B56" FontSize="14" FontFamily="Verdana" FontWeight="Bold" Height="36" Margin="14,200,0,0" VerticalAlignment="Top" Width="74" Grid.Row="3"/>
+        <Button Content="Payment" HorizontalAlignment="Left" Background="Orange" BorderBrush="#FF4C4B56" FontSize="14" FontFamily="Verdana" FontWeight="Bold" Height="36" VerticalAlignment="Top" Width="73" Grid.Row="3" Margin="12,238,0,0" Click="PaymentButton"/>
 
 
         <!-- Category Buttons -->
@@ -109,7 +104,7 @@
                 <TextBlock Text="Type:" VerticalAlignment="Center" Foreground="Orange"/>
                 <TextBox x:Name="TypeTextBox" VerticalAlignment="Center" IsReadOnly="True" Grid.Column="1" Foreground="Orange" Background="#FF454545"  BorderBrush="Orange" Margin="10,0,-10,0" TextChanged="OrderTypeTextBox" Grid.ColumnSpan="2"/>
             </Grid>
-            <ListBox x:Name="OrdersListBox" Width="297" Height="237"  Background="#FF454545"  BorderBrush="Orange" RenderTransformOrigin="0.5,0.5">
+            <ListBox x:Name="OrdersListBox" Width="297" Height="237"  Background="#FF454545"  BorderBrush="Orange" RenderTransformOrigin="0.5,0.5" d:ItemsSource="{d:SampleData ItemCount=5}">
                 <ListBox.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>

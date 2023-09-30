@@ -30,49 +30,50 @@ namespace POS_System.Pages
 
         private void LoadFoodData()
         {
+            // Your connection string here
+            string connStr = "server=localhost;user=root;database=yourdatabase;port=3306;password=yourpassword;";
+            MySqlConnection conn = new MySqlConnection(connStr);
 
-            string connectionString = "SERVER=localhost;DATABASE=pos_db;UID=root;PASSWORD=password;";
-
-            //connect database
-            MySqlConnection connection = new MySqlConnection(connectionString);
-
-            MySqlCommand command = new MySqlCommand("select * from item order by 1", connection);
-
-            connection.Open();
-
-            DataTable table = new DataTable();
-
-            table.Load(command.ExecuteReader());
-
-            connection.Close();
-
-            foreach (DataRow row in table.Rows)
+            try
             {
-                Button button = new Button()
+                conn.Open();
+
+                // Your query to fetch items
+                string sql = "SELECT * FROM items;";
+                MySqlCommand cmd = new MySqlCommand(sql, conn);
+                MySqlDataReader rdr = cmd.ExecuteReader();
+
+                while (rdr.Read())
                 {
-                    Content = row["item_name"].ToString(),
-                    Tag = row,
-                    Width = 150,
-                    Height = 50,
-                    Margin = new Thickness(5)
-                };
-                button.Click += Button_Click;
-                FoodItemsPanel.Children.Add(button);
+                    // Creating a new button for each item in database
+                    Button newButton = new Button();
+                    newButton.Content = rdr["item_name"].ToString(); // Set the text of the button to the item name
+                    newButton.Click += NewButton_Click; // Assign a click event handler
+                    newButton.Width = 150; // Set other properties as needed
+                    newButton.Height = 30;
+                    newButton.Margin = new Thickness(5);
+
+                    // Add the new button to a container on your window
+                    // For example, a StackPanel with the name 'buttonPanel'
+                    buttonPanel.Children.Add(newButton);
+                }
+
+                rdr.Close();
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+            conn.Close();
         }
 
 
 
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void NewButton_Click(object sender, RoutedEventArgs e)
         {
-            Button button = (Button)sender;
-            DataRow row = (DataRow)button.Tag;
-
-            // Here you can handle the button click event
-            // For example, display the selected item in a MessageBox
-            MessageBox.Show($"Item Selected: {row["item_name"]}");
-
+            Button clickedButton = sender as Button;
+            MessageBox.Show($"Button clicked: {clickedButton.Content}");
         }
 
 
