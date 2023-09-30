@@ -1,5 +1,7 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,8 +30,50 @@ namespace POS_System.Pages
 
         private void LoadData()
         {
-            throw new NotImplementedException();
+
+            string connectionString = "SERVER=localhost;DATABASE=pos_db;UID=root;PASSWORD=password;";
+
+            //connect database
+            MySqlConnection connection = new MySqlConnection(connectionString);
+
+            MySqlCommand command = new MySqlCommand("select * from item order by 1", connection);
+
+            connection.Open();
+
+            DataTable table = new DataTable();
+
+            table.Load(command.ExecuteReader());
+
+            connection.Close();
+
+            foreach (DataRow row in table.Rows)
+            {
+                Button button = new Button()
+                {
+                    Content = row["item_name"].ToString(),
+                    Tag = row,
+                    Width = 150,
+                    Height = 50,
+                    Margin = new Thickness(5)
+                };
+                button.Click += Button_Click;
+                FoodItemsListBox.Items.Add(button);
+            }
         }
+
+
+
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Button button = (Button)sender;
+            DataRow row = (DataRow)button.Tag;
+
+            // Here you can handle the button click event
+            // For example, display the selected item in a MessageBox
+            MessageBox.Show($"Item Selected: {row["itemName"]}");
+        }
+
 
         public MenuPage(string tableNumber, string Type)
         {
@@ -71,3 +115,4 @@ namespace POS_System.Pages
         }
     }
 }
+
