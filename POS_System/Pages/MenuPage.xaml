@@ -7,6 +7,10 @@
         mc:Ignorable="d"
         Title="MenuPage" WindowState="Maximized" Width="800" Height="450">
     <Grid Background="#212121">
+
+        
+
+
         <!-- Dark Gray Background -->
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -17,10 +21,6 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-
-
-
-
         <!-- Buttons -->
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -28,7 +28,9 @@
             <ColumnDefinition Width="300"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <Button Content="Back" HorizontalAlignment="Center" Background="Orange" BorderBrush="#FF4C4B56" FontSize="14" FontFamily="Verdana" FontWeight="Bold" Height="36" Margin="10,106,0,0" VerticalAlignment="Top" Width="73" Grid.Row="4" Click="Back_to_TablePage"/>
+        <!-- item button list -->
+        <StackPanel x:Name="FoodItemsPanel" Grid.Column="2" HorizontalAlignment="Center" Height="315" Margin="0,68,0,0" Grid.RowSpan="5" VerticalAlignment="Top" Width="282"/>
+        <Button Content="Back" HorizontalAlignment="Left" Background="Orange" BorderBrush="#FF4C4B56" FontSize="14" FontFamily="Verdana" FontWeight="Bold" Height="36" Margin="17,104,0,0" VerticalAlignment="Top" Width="73" Grid.Row="4" Click="Back_to_TablePage"/>
         <Button Background="Orange" BorderBrush="#FF4C4B56" FontSize="15" FontFamily="Verdana" FontWeight="Bold" Height="38" Margin="10,145,0,0" VerticalAlignment="Top" Width="73" Grid.Row="4">
             <Viewbox HorizontalAlignment="Center" VerticalAlignment="Center">
                 <TextBlock TextWrapping="Wrap">
@@ -112,37 +114,8 @@
             </ListBox>
         </StackPanel>
 
-
-
-
-
         <Button Grid.Column="1" Content="Send" HorizontalAlignment="Left" Height="24" Margin="10,396,0,0" Grid.RowSpan="5" VerticalAlignment="Top" Width="84" Foreground="Orange" Background="#FF454545"  BorderBrush="Orange" />
         <Button Grid.Column="1" Content="Void" HorizontalAlignment="Left" Height="24" Margin="100,396,0,0" Grid.RowSpan="5" VerticalAlignment="Top" Width="84" Foreground="Orange" Background="#FF454545"  BorderBrush="Orange"  />
-
-
-
-
-
-        <Grid Grid.Column="3" HorizontalAlignment="Left" Height="423" Margin="10,10,0,0" Grid.RowSpan="5" VerticalAlignment="Top" Width="300">
-            <ListBox x:Name="FoodItemsListBox" BorderThickness="0" Background="Transparent" Margin="-208,0,231,0">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <Button Content="{Binding FoodName}" Width="150" Height="50" Margin="5" />
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
-
-
-
-
-
-
-
-        </Grid>
-
-
-
-
 
 
 

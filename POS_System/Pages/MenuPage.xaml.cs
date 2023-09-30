@@ -25,10 +25,10 @@ namespace POS_System.Pages
         public MenuPage()
         {
             InitializeComponent();
-            LoadData();
+            LoadFoodData();
         }
 
-        private void LoadData()
+        private void LoadFoodData()
         {
 
             string connectionString = "SERVER=localhost;DATABASE=pos_db;UID=root;PASSWORD=password;";
@@ -57,7 +57,7 @@ namespace POS_System.Pages
                     Margin = new Thickness(5)
                 };
                 button.Click += Button_Click;
-                FoodItemsListBox.Items.Add(button);
+                FoodItemsPanel.Children.Add(button);
             }
         }
 
@@ -71,7 +71,8 @@ namespace POS_System.Pages
 
             // Here you can handle the button click event
             // For example, display the selected item in a MessageBox
-            MessageBox.Show($"Item Selected: {row["itemName"]}");
+            MessageBox.Show($"Item Selected: {row["item_name"]}");
+
         }
 
 
