@@ -23,6 +23,12 @@ namespace POS_System.Pages
         public MenuPage()
         {
             InitializeComponent();
+            LoadData();
+        }
+
+        private void LoadData()
+        {
+            throw new NotImplementedException();
         }
 
         public MenuPage(string tableNumber, string Type)
