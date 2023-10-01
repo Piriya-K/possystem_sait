@@ -86,12 +86,12 @@
                 <TextBlock Text="Type:" VerticalAlignment="Top" Margin="10,14,418,0" Foreground="Orange" FontSize="15" FontFamily="Verdana" Grid.ColumnSpan="2"/>
                 <TextBox Name="TypeTextBox" Text="Dining" VerticalAlignment="Top" IsReadOnly="True" Foreground="Orange" Background="#FF454545"  BorderBrush="Orange" Margin="58,10,-49,0" Height="26" Grid.Column="1"/>
             </Grid>
-            <ListBox x:Name="OrdersListBox" Width="470" Height="399"  Background="#FF454545"  BorderBrush="Orange" FontFamily="Verdana">
+            <ListBox x:Name="OrdersListBox" ItemsSource="{Binding Items}" Width="470" Height="399"  Background="#FF454545"  BorderBrush="Orange" FontFamily="Verdana">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="{Binding FoodName}" Width="150"/>
-                            <TextBlock Text="{Binding Quantity}" Width="50"/>
+                            <TextBlock Text="{Binding Name}" Width="150"/>
+                            <!--<TextBlock Text="{Binding Quantity}" Width="50"/>-->
                             <TextBlock Text="{Binding Price}" Width="100"/>
                         </StackPanel>
                     </DataTemplate>

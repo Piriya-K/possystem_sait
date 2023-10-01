@@ -1,6 +1,8 @@
 ﻿using MySql.Data.MySqlClient;
+using POS.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Data;
 using System.Linq;
 using System.Text;
@@ -14,6 +16,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Xml.Linq;
 
 namespace POS_System.Pages
 {
@@ -24,8 +27,10 @@ namespace POS_System.Pages
     {
         public MenuPage()
         {
-            this.Loaded += Window_Loaded; // Subscribe to the Loaded event
             InitializeComponent();
+            this.DataContext = this;
+            this.Loaded += Window_Loaded; // Subscribe to the Loaded event
+            
             
 
 
@@ -39,11 +44,14 @@ namespace POS_System.Pages
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            LoadFoodData(); // Call LoadFoodData when the window is loaded
+            LoadItemsData(); // Call LoadFoodData when the window is loaded
         }
 
-        private void LoadFoodData()
+        public ObservableCollection<Item> Items { get; set; } = new ObservableCollection<Item>();
+
+        private void LoadItemsData()
         {
+            
             // Your connection string here
             string connStr = "SERVER=localhost;DATABASE=pos_db;UID=root;PASSWORD=password;";
             MySqlConnection conn = new MySqlConnection(connStr);
@@ -59,9 +67,23 @@ namespace POS_System.Pages
 
                 while (rdr.Read())
                 {
+                    // Create an Item object for each item in database
+                    Item item = new Item()
+                    {
+                        Id = Convert.ToInt32(rdr["item_id"]),
+                        Name = rdr["item_name"].ToString(),
+                        Price = Convert.ToDouble(rdr["item_price"]),
+                        Description = rdr["item_description"].ToString(),
+                        Category = rdr["item_category"].ToString()
+                    };
+
+/*                    // Add item to Items collection
+                    Items.Add(item);*/
+
                     // Creating a new button for each item in database
                     Button newButton = new Button();
                     newButton.Content = rdr["item_name"].ToString(); // Set the text of the button to the item name
+                    newButton.Tag = item;
                     newButton.Click += NewButton_Click; // Assign a click event handler
                     newButton.Width = 150; // Set other properties as needed
                     newButton.Height = 30;
@@ -87,7 +109,15 @@ namespace POS_System.Pages
         private void NewButton_Click(object sender, RoutedEventArgs e)
         {
             Button clickedButton = sender as Button;
-            MessageBox.Show($"Button clicked: {clickedButton.Content}");
+            if (clickedButton != null && clickedButton.Tag is Item)
+            {
+                Item item = (Item)clickedButton.Tag as Item;
+                // Assuming Items is your ObservableCollection<Item>
+                if (item != null)
+                {
+                    Items.Add(item);
+                }
+            }
         }
 
 
