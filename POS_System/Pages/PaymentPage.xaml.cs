@@ -39,10 +39,10 @@ namespace POS_System.Pages
 
         }
 
-        private void Button_Click_2(object sender, RoutedEventArgs e)
+        private void CancelButton(object sender, RoutedEventArgs e)
         {
-            TablePage tablePage = new TablePage();
-            tablePage.Show();
+            MenuPage menuPage = new MenuPage();
+            menuPage.Show();
             this.Close();
         }
     }

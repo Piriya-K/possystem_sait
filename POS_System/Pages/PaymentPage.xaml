@@ -29,7 +29,7 @@
             <Button Content="Visa" Grid.Row="2" Grid.Column="0" Margin="80,5,0,1" Foreground="Orange" Background="#FF4C4B56" BorderBrush="Orange"/>
             <Button Content="M/C" Grid.Row="3" Grid.Column="0" Margin="80,4,0,0" Foreground="Orange" Background="#FF4C4B56" BorderBrush="Orange" />
             <Button Content="AMEX" Grid.Row="4" Grid.Column="0" Margin="80,5,0,1" Foreground="Orange" Background="#FF4C4B56" BorderBrush="Orange"/>
-            <Button Content="Cancel" Grid.Row="6" Grid.Column="0" Margin="80,2,0,0" HorizontalAlignment="Left" Width="199" Foreground="Orange" Background="#FF4C4B56" BorderBrush="Orange" Click="Button_Click_2"/>
+            <Button Content="Cancel" Grid.Row="6" Grid.Column="0" Margin="80,2,0,0" HorizontalAlignment="Left" Width="199" Foreground="Orange" Background="#FF4C4B56" BorderBrush="Orange" Click="CancelButton"/>
             <Button Content="Save" Grid.Row="5" Grid.Column="0" Margin="80,8,0,3" Foreground="Orange" Background="#FF4C4B56" BorderBrush="Orange"/>
 
 

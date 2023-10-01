@@ -24,14 +24,28 @@ namespace POS_System.Pages
     {
         public MenuPage()
         {
+            this.Loaded += Window_Loaded; // Subscribe to the Loaded event
             InitializeComponent();
-            LoadFoodData();
+            
+
+
+        }
+        public MenuPage(string tableNumber, string Type) : this()
+        {
+            TableNumberTextBox.Text = tableNumber;
+            TypeTextBox.Text = Type;
+        }
+
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            LoadFoodData(); // Call LoadFoodData when the window is loaded
         }
 
         private void LoadFoodData()
         {
             // Your connection string here
-            string connStr = "server=localhost;user=root;database=yourdatabase;port=3306;password=yourpassword;";
+            string connStr = "SERVER=localhost;DATABASE=pos_db;UID=root;PASSWORD=password;";
             MySqlConnection conn = new MySqlConnection(connStr);
 
             try
@@ -39,7 +53,7 @@ namespace POS_System.Pages
                 conn.Open();
 
                 // Your query to fetch items
-                string sql = "SELECT * FROM items;";
+                string sql = "SELECT * FROM item;";
                 MySqlCommand cmd = new MySqlCommand(sql, conn);
                 MySqlDataReader rdr = cmd.ExecuteReader();
 
@@ -77,12 +91,7 @@ namespace POS_System.Pages
         }
 
 
-        public MenuPage(string tableNumber, string Type)
-        {
-            InitializeComponent();
-            TableNumberTextBox.Text = tableNumber;
-            TypeTextBox.Text = Type;
-        }
+
 
 
 
@@ -115,6 +124,8 @@ namespace POS_System.Pages
             TablePage tablePage = new TablePage();
 
         }
+
+
     }
 }
 
