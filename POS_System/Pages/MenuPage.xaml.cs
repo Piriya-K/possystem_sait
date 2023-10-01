@@ -104,18 +104,23 @@ namespace POS_System.Pages
         }
 
 
-
+        private double TotalAmount = 0.0;
 
         private void NewButton_Click(object sender, RoutedEventArgs e)
         {
+           
             Button clickedButton = sender as Button;
             if (clickedButton != null && clickedButton.Tag is Item)
             {
                 Item item = (Item)clickedButton.Tag as Item;
-                // Assuming Items is your ObservableCollection<Item>
+
                 if (item != null)
                 {
                     Items.Add(item);
+                    
+                    TotalAmount += item.Price;
+
+                    TotalAmountTextBlock.Text = TotalAmount.ToString("C");
                 }
             }
         }
