@@ -1,73 +1,52 @@
 ﻿using MySql.Data.MySqlClient;
 using POS.Models;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using System.Xml.Linq;
+using System.Windows.Input;
+using POS_System.Models;
 
 namespace POS_System.Pages
 {
-    /// <summary>
-    /// Interaction logic for MenuPage.xaml
-    /// </summary>
     public partial class MenuPage : Window
     {
         public MenuPage()
         {
             InitializeComponent();
             this.DataContext = this;
-            this.Loaded += Window_Loaded; // Subscribe to the Loaded event
-            
-            
-
-
+            this.Loaded += Window_Loaded;
         }
+
         public MenuPage(string tableNumber, string Type) : this()
         {
             TableNumberTextBox.Text = tableNumber;
             TypeTextBox.Text = Type;
         }
 
-
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            LoadItemsData(); // Call LoadFoodData when the window is loaded
+            LoadCategoryData(); // Call LoadCategoryData to load category buttons
+            LoadItemsData(); // Call LoadItemsData to load item buttons
         }
 
         public ObservableCollection<Item> Items { get; set; } = new ObservableCollection<Item>();
 
         private void LoadItemsData()
         {
-            
-            // Your connection string here
             string connStr = "SERVER=localhost;DATABASE=pos_db;UID=root;PASSWORD=password;";
             MySqlConnection conn = new MySqlConnection(connStr);
 
             try
             {
                 conn.Open();
-
-                // Your query to fetch items
                 string sql = "SELECT * FROM item;";
                 MySqlCommand cmd = new MySqlCommand(sql, conn);
                 MySqlDataReader rdr = cmd.ExecuteReader();
 
                 while (rdr.Read())
                 {
-                    // Create an Item object for each item in database
                     Item item = new Item()
                     {
                         Id = Convert.ToInt32(rdr["item_id"]),
@@ -77,21 +56,15 @@ namespace POS_System.Pages
                         Category = rdr["item_category"].ToString()
                     };
 
-/*                    // Add item to Items collection
-                    Items.Add(item);*/
-
-                    // Creating a new button for each item in database
                     Button newButton = new Button();
-                    newButton.Content = rdr["item_name"].ToString(); // Set the text of the button to the item name
+                    newButton.Content = rdr["item_name"].ToString();
                     newButton.Tag = item;
-                    newButton.Click += NewButton_Click; // Assign a click event handler
-                    newButton.Width = 150; // Set other properties as needed
-                    newButton.Height = 30;
-                    newButton.Margin = new Thickness(5);
+                    newButton.Click += NewButton_Click;
+                    newButton.Width = 150;
+                    newButton.Height = 60;
+                    SetButtonStyle(newButton);
 
-                    // Add the new button to a container on your window
-                    // For example, a StackPanel with the name 'buttonPanel'
-                    buttonPanel.Children.Add(newButton);
+                    categoryButtonPanel.Children.Add(newButton);
                 }
 
                 rdr.Close();
@@ -103,23 +76,27 @@ namespace POS_System.Pages
             conn.Close();
         }
 
-
-        private double TotalAmount = 0.0;
-
         private void NewButton_Click(object sender, RoutedEventArgs e)
         {
-           
             Button clickedButton = sender as Button;
             if (clickedButton != null && clickedButton.Tag is Item)
             {
                 Item item = (Item)clickedButton.Tag as Item;
-
                 if (item != null)
                 {
-                    Items.Add(item);
-                    
-                    TotalAmount += item.Price;
+                    // Create an OrderedItem object with the correct property names
+                    OrderedItem orderedItem = new OrderedItem
+                    {
+                        ItemName = item.Name,
+                        Quantity = 1, // You can set the quantity as needed
+                        ItemPrice = item.Price
+                    };
 
+                    // Add the orderedItem to the ObservableCollection of OrderedItem
+                    OrdersListBox.Items.Add(orderedItem);
+
+                    // Calculate and update the total amount
+                    TotalAmount += item.Price;
                     TotalAmountTextBlock.Text = TotalAmount.ToString("C");
                 }
             }
@@ -129,21 +106,94 @@ namespace POS_System.Pages
 
 
 
+        private void LoadCategoryData()
+        {
+            string connStr = "SERVER=localhost;DATABASE=pos_db;UID=root;PASSWORD=password;";
+            MySqlConnection conn = new MySqlConnection(connStr);
+
+            try
+            {
+                conn.Open();
+                string sql = "SELECT category_name FROM category;";
+                MySqlCommand cmd = new MySqlCommand(sql, conn);
+                MySqlDataReader rdr = cmd.ExecuteReader();
+
+                while (rdr.Read())
+                {
+                    Button newButton = new Button();
+                    newButton.Content = rdr["category_name"].ToString();
+                    newButton.Width = 150;
+                    newButton.Height = 60;
+                    SetButtonStyle(newButton);
+                    newButton.Click += (sender, e) => LoadItemsByCategory(newButton.Content.ToString());
+                    categoryButtonPanel.Children.Add(newButton);
+                }
+
+                rdr.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+            conn.Close();
+        }
+
+        private void LoadItemsByCategory(string categoryName)
+        {
+            itemButtonPanel.Children.Clear();
+            string connStr = "SERVER=localhost;DATABASE=pos_db;UID=root;PASSWORD=password;";
+            MySqlConnection conn = new MySqlConnection(connStr);
+
+            try
+            {
+                conn.Open();
+                string sql = "SELECT item_name FROM item WHERE item_category = @category;";
+                MySqlCommand cmd = new MySqlCommand(sql, conn);
+                cmd.Parameters.AddWithValue("@category", categoryName);
+                MySqlDataReader rdr = cmd.ExecuteReader();
+
+                while (rdr.Read())
+                {
+                    Button newButton = new Button();
+                    newButton.Content = rdr["item_name"].ToString();
+                    newButton.Width = 150;
+                    newButton.Height = 60;
+                    SetButtonStyle(newButton);
+                    newButton.Click += NewButton_Click;
+                    itemButtonPanel.Children.Add(newButton);
+                }
+
+                rdr.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+            conn.Close();
+        }
+
+        private void SetButtonStyle(Button button)
+        {
+            button.FontFamily = new FontFamily("Verdana");
+            button.FontSize = 20;
+            button.Background = Brushes.Orange;
+            button.FontWeight = FontWeights.Bold;
+            button.BorderBrush = Brushes.Orange;
+            button.Margin = new Thickness(5);
+        }
+
+        private double TotalAmount = 0.0;
 
         private void Back_to_TablePage(object sender, RoutedEventArgs e)
         {
-            // Go to TablePage.xaml when they click on Back button
             TablePage tablePage = new TablePage();
             tablePage.Show();
             this.Close();
-
         }
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            //Change number to correspoding table.
             TablePage tablePage = new TablePage();
-
         }
 
         private void PaymentButton(object sender, RoutedEventArgs e)
@@ -151,16 +201,11 @@ namespace POS_System.Pages
             PaymentPage paymentPage = new PaymentPage();
             paymentPage.Show();
             this.Close();
-
         }
 
         private void OrderTypeTextBox(object sender, TextChangedEventArgs e)
         {
             TablePage tablePage = new TablePage();
-
         }
-
-
     }
 }
-

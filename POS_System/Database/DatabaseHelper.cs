@@ -108,6 +108,40 @@ namespace POS_System.Database
             return username;
         }
 
+        public List<string> GetCategoryNames()
+        {
+            List<string> categoryNames = new List<string>();
+
+            if (OpenConnection())
+            {
+                try
+                {
+                    string query = "SELECT category_name FROM category";
+                    MySqlCommand command = new MySqlCommand(query, sqlConn);
+
+                    using (MySqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            string categoryName = reader["category_name"].ToString();
+                            categoryNames.Add(categoryName);
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Error: " + ex.Message);
+                }
+                finally
+                {
+                    CloseConnection();
+                }
+            }
+
+            return categoryNames;
+        }
+
+
         public void Dispose()
         {
             CloseConnection();
