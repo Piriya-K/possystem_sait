@@ -8,6 +8,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Pages\Window1.xaml.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Remove="Pages\Window1.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="MySql.Data" Version="8.1.0" />
   </ItemGroup>
 
