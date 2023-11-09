@@ -1,7 +1,11 @@
-﻿using POS_System.Database;
+﻿using POS.Models;
+using POS_System.Database;
+using POS_System.Models;
 using POS_System.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Diagnostics.Metrics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,11 +26,12 @@ namespace POS_System.Pages
     public partial class LoginScreen : Window
     {
         private DatabaseHelper db;
-
+        private ObservableCollection<User> users = new ObservableCollection<User>();
         public LoginScreen()
         {
             InitializeComponent();
-            DataContext = new LoginScreenViewModel();
+            id.Focus();
+            /*DataContext = new LoginScreenViewModel();*/
             db = new DatabaseHelper("localhost", "pos_db", "root", "password");
         }
 
@@ -37,12 +42,25 @@ namespace POS_System.Pages
 
             if (db.AuthenticateUser(enteredUserId, enteredPassword))
             {
+                
                 string authenticatedUsername = db.GetUsername(enteredUserId);
+
                 MessageBox.Show("Login successful! " + authenticatedUsername);
 
-                // Pass the userId to TablePage when creating an instance
-                TablePage window2 = new TablePage();
-                window2.Show();
+                int userId = int.Parse(enteredUserId);
+
+                // Only 100 to 110 admin can go to AdminManagement page
+                if (userId >= 100 & userId <= 110)
+                {
+                    AdminManagement windowAdmin = new AdminManagement();
+                    windowAdmin.Show();
+                }
+                
+                else
+                {
+                    TablePage window2 = new TablePage();
+                    window2.Show();
+                }
 
                 // Close the current login window if needed
                 this.Close();
