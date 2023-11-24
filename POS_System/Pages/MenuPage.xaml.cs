@@ -1123,6 +1123,7 @@ namespace POS_System.Pages
                 // Calculate TotalAmount with GST included
                 double totalAmountWithGST = TotalAmount + gstAmount;
                 int customerID = 1;
+                double customerTotalAmount;
                 // Iterate through split bills
 
                 do
@@ -1234,7 +1235,17 @@ namespace POS_System.Pages
                     subTotalParagraph.FontSize = 20; // Increase the font size
                     subTotalParagraph.TextAlignment = TextAlignment.Right;
 
-                    double customerTotalAmount = orderedItems.Where(item => item.customerID == customerID).Sum(item => item.ItemPrice);
+                    if (_numberOfBill==0)
+                    {
+                        customerTotalAmount = OrderItemcCollection.Where(item => item.customerID == 0).Sum(item => item.ItemPrice);
+                        
+                    }
+                    else
+                    {
+                        customerTotalAmount = OrderItemcCollection.Where(item => item.customerID == customerID).Sum(item => item.ItemPrice);
+
+                    }
+                   
                     Paragraph subTotalValueParagraph = new Paragraph(new Run(customerTotalAmount.ToString("C")));
                     paymentTableRowGroup.Rows.Add(CreateTableRowWithParagraph(subTotalParagraph, subTotalValueParagraph));
 

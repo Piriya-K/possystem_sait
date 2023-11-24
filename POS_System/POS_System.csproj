@@ -15,6 +15,7 @@
     <None Remove="Images\addUser.png" />
     <None Remove="Images\AdminPicture.png" />
     <None Remove="Images\BackBtn.png" />
+    <None Remove="Images\Cash.png" />
     <None Remove="Images\deleteIcon.png" />
     <None Remove="Images\DeleteItem.png" />
     <None Remove="Images\editIcon.png" />
@@ -27,6 +28,7 @@
     <None Remove="Images\ManageSales.png" />
     <None Remove="Images\ManageTable.png" />
     <None Remove="Images\ManageUser.png" />
+    <None Remove="Images\MC.png" />
     <None Remove="Images\OrderReport.png" />
     <None Remove="Images\Refund.png" />
     <None Remove="Images\ResetBtn.png" />
@@ -35,6 +37,12 @@
 
   <ItemGroup>
     <Page Remove="Pages\Window1.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\MC.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
   <ItemGroup>
@@ -53,6 +61,9 @@
   <ItemGroup>
     <Resource Include="Images\addUser.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Cash.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\deleteIcon.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
