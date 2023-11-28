@@ -209,7 +209,7 @@ namespace POS_System.Pages
 
         private void ResetTable_Click(object sender, RoutedEventArgs e)
         {
-            MessageBoxResult result = MessageBox.Show("Remove every table order?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            MessageBoxResult result = MessageBox.Show("Reset every table order?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (result == MessageBoxResult.Yes)
             {
                 RemoveOrderAllTable();
@@ -237,9 +237,10 @@ namespace POS_System.Pages
                     deleteItemListCmd.ExecuteNonQuery();
 
 
-                    string deleteOrderQuery = "DELETE FROM `order` WHERE order_id > 0 and paid = 'n';";
+                    string updateOrderStatusQuery = "UPDATE pos_db.order SET paid = 'c' WHERE order_id > 0 and paid = 'n';";
 
-                    MySqlCommand deleteOrderCmd = new MySqlCommand(deleteOrderQuery, conn);
+
+                    MySqlCommand deleteOrderCmd = new MySqlCommand(updateOrderStatusQuery, conn);
                     deleteOrderCmd.ExecuteNonQuery();
 
 
