@@ -177,7 +177,7 @@
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
 
-                    <GridViewColumn Header="Item Price" Width="190">
+                    <GridViewColumn Header="Item Price" Width="180">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding ItemPrice ,StringFormat=F2}" TextAlignment="right"/>
@@ -244,7 +244,7 @@
             </Button>
 
 
-            <TextBox Name="TotalAmountTextBlock" TextAlignment="Right" TextWrapping="Wrap" IsReadOnly="True" FontSize="18" Foreground="White" Background="#FF454545" FontFamily="Verdana" BorderBrush="Orange" Padding="10" BorderThickness="2,1,1,1" Grid.Column="2" Margin="0,0,0,1"/>
+            <TextBox Name="TotalAmountTextBlock" TextAlignment="Right" TextWrapping="Wrap" IsReadOnly="True" FontSize="18" Foreground="White" Background="#FF454545" FontFamily="Verdana" BorderBrush="Orange" Padding="10" BorderThickness="2,2,2,2" Grid.Column="2" Margin="0,0,0,0"/>
             <TextBox Name="TotalAmountTextBox" Grid.Column="2"  IsReadOnly="True" TextWrapping="Wrap" Text="Total Amount : " Background="#FF454545" BorderBrush="{x:Null}" Foreground="White" FontFamily="Verdana" FontSize="18" RenderTransformOrigin="0.5,0.5" Margin="4,10,176,25" >
                 <TextBox.RenderTransform>
                     <TransformGroup>
