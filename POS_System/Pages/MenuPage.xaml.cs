@@ -198,7 +198,7 @@ namespace POS_System.Pages
 
                             TotalAmount += orderedItem.ItemPrice;
                         }
-                        TotalAmountTextBlock.Text = "Total Amount :             " + TotalAmount.ToString("C", new CultureInfo("en-CA"));
+                        TotalAmountTextBlock.Text =TotalAmount.ToString("C", new CultureInfo("en-CA"));
 
                         if (isSplited == true)
                         {
@@ -368,7 +368,7 @@ namespace POS_System.Pages
             TotalAmount += orderedItem.ItemPrice;
             CultureInfo cultureInfo = new CultureInfo("en-CA");
             cultureInfo.NumberFormat.CurrencyDecimalDigits = 2;
-            TotalAmountTextBlock.Text = "Total Amount :             " + TotalAmount.ToString("C", cultureInfo);
+            TotalAmountTextBlock.Text =TotalAmount.ToString("C", cultureInfo);
         }
 
         //(Button for Split Bill)
@@ -694,7 +694,7 @@ namespace POS_System.Pages
                 TotalAmount +=backupOrderedItem.ItemPrice;
             }
             OrdersListView.Items.GroupDescriptions.Clear();
-            TotalAmountTextBlock.Text = "Total Amount :             " + TotalAmount.ToString("C", new CultureInfo("en-CA"));
+            TotalAmountTextBlock.Text =TotalAmount.ToString("C", new CultureInfo("en-CA"));
         }
 
         //(Method) Back up OrderedItem collection
@@ -774,10 +774,10 @@ namespace POS_System.Pages
                 {
                     orderedItems.Remove(selectedOrderedItem);
                     TotalAmount -= selectedOrderedItem.ItemPrice;
-                    TotalAmountTextBlock.Text = "Total Amount :             "  + TotalAmount.ToString();
+                    TotalAmountTextBlock.Text =TotalAmount.ToString();
                     CultureInfo cultureInfo = new CultureInfo("en-CA");
                     cultureInfo.NumberFormat.CurrencyDecimalDigits = 2;
-                    TotalAmountTextBlock.Text = "Total Amount :             " + TotalAmount.ToString("C", cultureInfo);
+                    TotalAmountTextBlock.Text =TotalAmount.ToString("C", cultureInfo);
                 }
 
                 else
@@ -788,10 +788,9 @@ namespace POS_System.Pages
  
                         orderedItems.Remove(selectedOrderedItem);
                         TotalAmount -= selectedOrderedItem.ItemPrice;
-                        TotalAmountTextBlock.Text = "Total Amount :             " + TotalAmount.ToString();
                         CultureInfo cultureInfo = new CultureInfo("en-CA");
                         cultureInfo.NumberFormat.CurrencyDecimalDigits = 2;
-                        TotalAmountTextBlock.Text = "Total Amount :             " + TotalAmount.ToString("C", cultureInfo);
+                        TotalAmountTextBlock.Text = TotalAmount.ToString("C", cultureInfo);
                         
                     }
                     else
