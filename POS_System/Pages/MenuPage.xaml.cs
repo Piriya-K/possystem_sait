@@ -116,6 +116,8 @@ namespace POS_System.Pages
 
         }
 
+
+
         //Method: Group List by customer id
         private void GroupItemList()
         {
@@ -1084,7 +1086,7 @@ namespace POS_System.Pages
 
         }
 
-
+        //Event: print customer bill after click
         private void PrintButton_Click(object sender, RoutedEventArgs e)
         {
             if (orderedItems.Count == 0 && itemClick == false)
@@ -1107,6 +1109,9 @@ namespace POS_System.Pages
             else
             {
                 PrintCustomerBill(orderedItems);
+                MessageBox.Show("Print all customer bill.");
+                MenuPage menuPage = new MenuPage();
+                menuPage.Refresh();
             }
         }
 
