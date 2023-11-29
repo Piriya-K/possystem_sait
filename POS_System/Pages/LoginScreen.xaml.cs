@@ -1,5 +1,6 @@
 ﻿using POS.Models;
 using POS_System.Database;
+using POS_System.Dialog;
 using POS_System.Models;
 using System;
 using System.Collections.Generic;
@@ -47,29 +48,61 @@ namespace POS_System.Pages
                 
                 string authenticatedUsername = db.GetUsername(enteredUserId);
 
-                MessageBox.Show("Login successful! " + authenticatedUsername);
-
-                int userId = int.Parse(enteredUserId);
-
-                // Only 100 to 110 admin can go to AdminManagement page
-                if (userId >= 100 & userId <= 199)
+                WelcomeDialog welcomDialog = new WelcomeDialog(authenticatedUsername);
+                if (welcomDialog.ShowDialog() == true)
                 {
-                    AdminManagement windowAdmin = new AdminManagement();
-                    windowAdmin.Show();
-                } else if (userId >= 200 & userId <= 299)
-                {
-                    ManagerManagement windowManager = new ManagerManagement();
-                    windowManager.Show();
+                    int userId = int.Parse(enteredUserId);
+
+                    // Only 100 to 110 admin can go to AdminManagement page
+                    if (userId >= 100 & userId <= 199)
+                    {
+                        AdminManagement windowAdmin = new AdminManagement();
+                        windowAdmin.Show();
+                    }
+                    else if (userId >= 200 & userId <= 299)
+                    {
+                        ManagerManagement windowManager = new ManagerManagement();
+                        windowManager.Show();
+                    }
+
+                    else
+                    {
+                        TablePage window2 = new TablePage();
+                        window2.Show();
+                    }
+
+                    // Close the current login window if needed
+                    this.Close();
                 }
-                
                 else
                 {
-                    TablePage window2 = new TablePage();
-                    window2.Show();
+                    int userId = int.Parse(enteredUserId);
+
+                    // Only 100 to 110 admin can go to AdminManagement page
+                    if (userId >= 100 & userId <= 199)
+                    {
+                        AdminManagement windowAdmin = new AdminManagement();
+                        windowAdmin.Show();
+                    }
+                    else if (userId >= 200 & userId <= 299)
+                    {
+                        ManagerManagement windowManager = new ManagerManagement();
+                        windowManager.Show();
+                    }
+
+                    else
+                    {
+                        TablePage window2 = new TablePage();
+                        window2.Show();
+                    }
+
+                    // Close the current login window if needed
+                    this.Close();
                 }
 
-                // Close the current login window if needed
-                this.Close();
+
+
+
             }
             else
             {
