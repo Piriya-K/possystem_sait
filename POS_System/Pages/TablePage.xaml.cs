@@ -38,11 +38,13 @@ namespace POS_System.Pages
             if (User.id >= 300)
             {
                 logout_button.Content = "Logout";
+                reset_button.Visibility = Visibility.Collapsed;
             } 
             
             else
             {
                 logout_button.Content = "Close";
+                
             }
         }
 
@@ -199,6 +201,11 @@ namespace POS_System.Pages
                         {
                             takeOutButton.Background = Brushes.Green;
                         } 
+                        else
+                        {
+                            tableButton.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#383838")); ;
+                            takeOutButton.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#383838")); ;
+                        }
 
                     }
 
@@ -275,10 +282,14 @@ namespace POS_System.Pages
             var dialog = new ChangeTableDialog();
             dialog.TableColorUpdated += Dialog_TableColorUpdated;
             dialog.ShowDialog();
+            TablePage tablePage = new TablePage();
+            this.Close();
+            tablePage.Show();
         }
         private void Dialog_TableColorUpdated(object sender, EventArgs e)
         {
             UpdateTableColors();
+
         }
 
 
