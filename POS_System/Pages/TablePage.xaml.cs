@@ -25,7 +25,6 @@ namespace POS_System.Pages
         private string connStr = "SERVER=localhost;DATABASE=pos_db;UID=root;PASSWORD=password;";
         public string TableNumber { get; private set; }
         public string OrderType { get; private set; }
-
         public string userName { get; private set; }
         public string userId { get; private set; }
 
