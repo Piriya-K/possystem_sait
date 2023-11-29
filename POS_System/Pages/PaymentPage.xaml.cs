@@ -188,11 +188,12 @@ namespace POS_System.Pages
 
                     if (result == MessageBoxResult.Yes)
                     {
-                        int key = _eachPaymentDictionary.Count;
-                        int forConditionKey = key + 1;
+                        int numberOFPagmentInDictionary = _eachPaymentDictionary.Count;
+                        int forConditionKey = numberOFPagmentInDictionary + 1;
+                        MessageBox.Show("numberOFPagmentInDictionary = " + _eachPaymentDictionary.Count.ToString()+ "\n" + "number of bill = "+ _numberOfBill);
 
 
-                        if (key < _numberOfBill || _numberOfBill == 0)
+                        if (numberOFPagmentInDictionary < _numberOfBill || _numberOfBill == 0)
                         {
                             MessageBox.Show($"Customer ID #{_customerID} payment saved.");
                             AddPaymentList();
@@ -247,7 +248,7 @@ namespace POS_System.Pages
                 Payment eachCustomerPayment = new Payment
                 {
 
-                    customerID = +_customerID,
+                    customerID = _customerID,
                     paymentID = _customerID,
                     orderID = _orderId,
                     orderType = _orderType,
@@ -264,8 +265,8 @@ namespace POS_System.Pages
 
                 };
 
-                int newKey = _eachPaymentDictionary.Count + 1;
-                _eachPaymentDictionary.TryAdd(newKey, eachCustomerPayment);
+                
+                _eachPaymentDictionary.TryAdd(_customerID, eachCustomerPayment);
             }
         }
 
