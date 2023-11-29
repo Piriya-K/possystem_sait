@@ -36,6 +36,7 @@
     <None Remove="Images\ResetBtn.png" />
     <None Remove="Images\userDelete.png" />
     <None Remove="Images\Visa.png" />
+    <None Remove="Images\WaiterPicture.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -117,6 +118,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\Visa.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\WaiterPicture.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>
