@@ -15,9 +15,9 @@
             <RowDefinition Height="51" MinHeight="51" MaxHeight="51"/>
             <RowDefinition Height="82" MinHeight="82" MaxHeight="82"/>
             <RowDefinition Height="51" MinHeight="51" MaxHeight="51"/>
-            <RowDefinition Height="400" MinHeight="400" MaxHeight="400"/>
-            <RowDefinition Height="65" MinHeight="65" MaxHeight="65"/>
-            <RowDefinition MinHeight="1" MaxHeight="20"/>
+            <RowDefinition Height="550" MinHeight="550" MaxHeight="550"/>
+            <RowDefinition Height="90" MinHeight="90" MaxHeight="90"/>
+            <RowDefinition MinHeight="20" MaxHeight="20"/>
 
         </Grid.RowDefinitions>
         <!-- Buttons -->
@@ -218,10 +218,10 @@
                     Grid.Column="0" Margin="0,0,0,1">
                 <Viewbox HorizontalAlignment="Center"
                          VerticalAlignment="Center">
-                    <StackPanel Height="199">
+                    <StackPanel Height="294">
                         <Image
                        Source="pack://application:,,,/POS_System;component/Images/ResetBtn.png"
-                       Width="296" Height="111" Margin="0,20,0,0"
+                       Width="296" Height="166" Margin="0,20,0,0"
                        />
                         <TextBlock
                            Text="RESET" FontWeight="Bold"
@@ -233,10 +233,10 @@
 
             <Button HorizontalAlignment="Center" Width="90" Foreground="White" Background="#FF454545"  BorderBrush="Red" FontSize="20" Click="DeleteItemButton_Click" Grid.Column="1" FontWeight="Bold" BorderThickness="2,2,2,2" Margin="0,0,0,1"  >
                 <Viewbox HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <StackPanel Height="169" Width="315">
+                    <StackPanel Height="287" Width="315">
                         <Image
                        Source="pack://application:,,,/POS_System;component/Images/DeleteItem.png"
-                       Width="249" Height="114"
+                       Width="318" Height="182"
                        />
                         <TextBlock Text="Delete Item" TextWrapping="Wrap" TextAlignment="Center" Width="329" Height="55" FontFamily="Verdana" FontSize="45"/>
                     </StackPanel>
@@ -245,7 +245,7 @@
 
 
             <TextBox Name="TotalAmountTextBlock" TextAlignment="Right" TextWrapping="Wrap" IsReadOnly="True" FontSize="18" Foreground="White" Background="#FF454545" FontFamily="Verdana" BorderBrush="Orange" Padding="10" BorderThickness="2,2,2,2" Grid.Column="2" Margin="0,0,0,0"/>
-            <TextBox Name="TotalAmountTextBox" Grid.Column="2"  IsReadOnly="True" TextWrapping="Wrap" Text="Total Amount : " Background="#FF454545" BorderBrush="{x:Null}" Foreground="White" FontFamily="Verdana" FontSize="18" RenderTransformOrigin="0.5,0.5" Margin="4,10,176,25" >
+            <TextBox Name="TotalAmountTextBox" Grid.Column="2"  IsReadOnly="True" TextWrapping="Wrap" Text="Total Amount : " Background="#FF454545" BorderBrush="{x:Null}" Foreground="White" FontFamily="Verdana" FontSize="18" RenderTransformOrigin="0.5,0.5" Margin="2,12,179,44" >
                 <TextBox.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
