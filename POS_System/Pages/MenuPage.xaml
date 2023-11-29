@@ -11,13 +11,13 @@
     <Grid Background="#212121" Margin="0,0,0,0">
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="*" MinHeight="5" MaxHeight="18"/>
-            <RowDefinition Height="*" MinHeight="51" MaxHeight="51"/>
-            <RowDefinition Height="*" MinHeight="82" MaxHeight="82"/>
-            <RowDefinition Height="*" MinHeight="51" MaxHeight="51"/>
-            <RowDefinition Height="*" MinHeight="300" MaxHeight="400"/>
-            <RowDefinition Height="*" MinHeight="65" MaxHeight="65"/>
-            <RowDefinition Height="*" MinHeight="1" MaxHeight="20"/>
+            <RowDefinition Height="5" MinHeight="5" MaxHeight="5"/>
+            <RowDefinition Height="51" MinHeight="51" MaxHeight="51"/>
+            <RowDefinition Height="82" MinHeight="82" MaxHeight="82"/>
+            <RowDefinition Height="51" MinHeight="51" MaxHeight="51"/>
+            <RowDefinition Height="400" MinHeight="400" MaxHeight="400"/>
+            <RowDefinition Height="65" MinHeight="65" MaxHeight="65"/>
+            <RowDefinition MinHeight="1" MaxHeight="20"/>
 
         </Grid.RowDefinitions>
         <!-- Buttons -->

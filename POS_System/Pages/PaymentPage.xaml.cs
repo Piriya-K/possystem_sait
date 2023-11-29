@@ -687,6 +687,7 @@ namespace POS_System.Pages
         {
             _paymentMethod = "Cash";
             cashBtn.Background = Brushes.White;
+            debitBtn.Background = new SolidColorBrush((System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString("#FF4C4B56"));
             visaBtn.Background = new SolidColorBrush((System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString("#FF4C4B56"));
             mcBtn.Background = new SolidColorBrush((System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString("#FF4C4B56"));
             amexBtn.Background = new SolidColorBrush((System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString("#FF4C4B56"));
@@ -703,11 +704,31 @@ namespace POS_System.Pages
 
         }
 
+        //Debit button (paymentType = debit)
+        private void debitBtn_Click(object sender, RoutedEventArgs e)
+        {
+            _paymentMethod = "Debit";
+            cashBtn.Background = new SolidColorBrush((System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString("#FF4C4B56"));
+            debitBtn.Background = Brushes.White;
+            visaBtn.Background = new SolidColorBrush((System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString("#FF4C4B56"));
+            mcBtn.Background = new SolidColorBrush((System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString("#FF4C4B56"));
+            amexBtn.Background = new SolidColorBrush((System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString("#FF4C4B56"));
+            if (changeTextBox.Text.Length > 3)
+            {
+                changeTextBox.Text = "0.0";
+                CultureInfo cultureInfo = new CultureInfo("en-CA");
+                cultureInfo.NumberFormat.CurrencyDecimalDigits = 2;
+                tipsTextbox.Text = CalculateTipAmount().ToString("C", cultureInfo);
+
+            }
+        }
+
         //visa button (payment type = visa)
         private void visaBtn_Click(object sender, RoutedEventArgs e)
         {
             _paymentMethod = "Visa";
             cashBtn.Background = new SolidColorBrush((System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString("#FF4C4B56"));
+            debitBtn.Background = new SolidColorBrush((System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString("#FF4C4B56"));
             visaBtn.Background = Brushes.White;
             mcBtn.Background = new SolidColorBrush((System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString("#FF4C4B56"));
             amexBtn.Background = new SolidColorBrush((System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString("#FF4C4B56"));
@@ -726,6 +747,7 @@ namespace POS_System.Pages
         {
             _paymentMethod = "Mastercard";
             cashBtn.Background = new SolidColorBrush((System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString("#FF4C4B56"));
+            debitBtn.Background = new SolidColorBrush((System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString("#FF4C4B56"));
             visaBtn.Background = new SolidColorBrush((System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString("#FF4C4B56"));
             mcBtn.Background = Brushes.White;
             amexBtn.Background = new SolidColorBrush((System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString("#FF4C4B56"));
@@ -745,6 +767,7 @@ namespace POS_System.Pages
         {
             _paymentMethod = "Amex";
             cashBtn.Background = new SolidColorBrush((System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString("#FF4C4B56"));
+            debitBtn.Background = new SolidColorBrush((System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString("#FF4C4B56"));
             visaBtn.Background = new SolidColorBrush((System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString("#FF4C4B56"));
             mcBtn.Background = new SolidColorBrush((System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString("#FF4C4B56"));
             amexBtn.Background = Brushes.White;
@@ -882,6 +905,8 @@ namespace POS_System.Pages
 
             }
         }
+
+
 
 
         //***
