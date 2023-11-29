@@ -36,6 +36,15 @@ namespace POS_System.Pages
             UpdateTableColors();
 
             UserNameTextBox.Text = "Welcome User ID: " + User.id;
+            if (User.id >= 300)
+            {
+                logout_button.Content = "Logout";
+            } 
+            
+            else
+            {
+                logout_button.Content = "Close";
+            }
         }
 
         public TablePage(string tableNumber, string orderType)
@@ -53,11 +62,18 @@ namespace POS_System.Pages
 
         private void LogoutButton_Click(object sender, RoutedEventArgs e)
         {
-            // Perform logout actions here
-            // For example, you can close the current window and navigate back to the login screen
-            LoginScreen loginScreen = new LoginScreen();
-            loginScreen.Show();
-            this.Close();
+            if(User.id >= 300)
+            {
+                LoginScreen loginScreen = new LoginScreen();
+                loginScreen.Show();
+                this.Close();
+            }
+
+            else
+            {
+                this.Close();
+            }
+
         }
 
 
