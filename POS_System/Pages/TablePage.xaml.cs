@@ -21,8 +21,8 @@ namespace POS_System.Pages
 {
     public partial class TablePage : Window
     {
+
         private string connStr = "SERVER=localhost;DATABASE=pos_db;UID=root;PASSWORD=password;";
-        // Define properties to store table number and order type
         public string TableNumber { get; private set; }
         public string OrderType { get; private set; }
 
@@ -51,9 +51,6 @@ namespace POS_System.Pages
         {
             InitializeComponent();
             UpdateTableColors();
-            // Store the table number and order type for future use
-            /*            this.TableNumber = tableNumber;
-                        this.OrderType = orderType;*/
             
         }
 
@@ -277,20 +274,11 @@ namespace POS_System.Pages
         private void ChangeTable_Click(object sender, RoutedEventArgs e)
         {
             var dialog = new ChangeTableDialog();
-
-            // Subscribe to the event
             dialog.TableColorUpdated += Dialog_TableColorUpdated;
-
-            // Populate ComboBoxes with tables (modify as needed)
-            // ...
-
-            // Show the dialog
             dialog.ShowDialog();
         }
         private void Dialog_TableColorUpdated(object sender, EventArgs e)
         {
-            // Handle the event and update the UI if necessary
-            // For example, you can call UpdateTableColors() here
             UpdateTableColors();
         }
 
