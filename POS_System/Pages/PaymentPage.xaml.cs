@@ -161,7 +161,7 @@ namespace POS_System.Pages
                 totalAmount += orderedItem.ItemPrice;
 
             }
-            return totalAmount;
+            return Math.Round(totalAmount, 2);
         }
 
 
@@ -421,7 +421,6 @@ namespace POS_System.Pages
                 detailTableRowGroup.Rows.Add(CreateTableRow("Order ID:", eachCustomerPayment.orderID.ToString()));
                 detailTableRowGroup.Rows.Add(CreateTableRow("Server:", User.id.ToString()));
 
-                // Add a line with dashes after "Server: John"
                 TableRow dashedLineRow = new TableRow();
                 TableCell dashedLineCell = new TableCell();
 
@@ -463,72 +462,111 @@ namespace POS_System.Pages
 
 
                 // Create a Paragraph for "Sub Total" with underline
-                Paragraph subTotalParagraph = new Paragraph(new Run("Sub Total:"));
-                subTotalParagraph.FontSize = 20; // Increase the font size
+                Paragraph subTotalParagraph = new Paragraph(new Run("Sub Total: "));
+                subTotalParagraph.FontSize = 15;
                 subTotalParagraph.TextAlignment = TextAlignment.Right;
 
                 //double customerTotalAmount = orderedItems.Where(item => item.customerID == customerID).Sum(item => item.ItemPrice);
                 double subTotalAmount = eachCustomerPayment.baseAmount;
                 Paragraph subTotalValueParagraph = new Paragraph(new Run(subTotalAmount.ToString("C")));
+                subTotalValueParagraph.FontSize = 15;
+                subTotalValueParagraph.TextAlignment = TextAlignment.Left;
                 paymentTableRowGroup.Rows.Add(CreateTableRowWithParagraph(subTotalParagraph, subTotalValueParagraph));
 
                 // Create a Paragraph for "GST"
-                Paragraph gstLabelParagraph = new Paragraph(new Run("Tax (5%):"));
-                gstLabelParagraph.FontSize = 20; // Increase the font size
+                Paragraph gstLabelParagraph = new Paragraph(new Run("Tax (5%): "));
+                gstLabelParagraph.FontSize = 15;
                 gstLabelParagraph.TextAlignment = TextAlignment.Right;
 
                 double customerGSTAmount = eachCustomerPayment.GST;
                 Paragraph gstValueParagraph = new Paragraph(new Run(customerGSTAmount.ToString("C")));
+                gstValueParagraph.FontSize = 15;
+                gstValueParagraph.TextAlignment = TextAlignment.Left;
                 paymentTableRowGroup.Rows.Add(CreateTableRowWithParagraph(gstLabelParagraph, gstValueParagraph));
 
+                // Create a Paragraph for "GST + Sub Total"
+                Paragraph totalDueLabelParagraph = new Paragraph(new Run("Total Due:"));
+                totalDueLabelParagraph.FontSize = 17;
+                totalDueLabelParagraph.FontWeight = FontWeight.FromOpenTypeWeight(600);
+                totalDueLabelParagraph.Margin = new Thickness(0, 20, 0, 0);
+                totalDueLabelParagraph.TextAlignment = TextAlignment.Right;
 
-
-                //*********************************
+                double totalDueAmount = eachCustomerPayment.grossAmount;
+                Paragraph totalDueValueParagraph = new Paragraph(new Run(totalDueAmount.ToString("C")));
+                totalDueValueParagraph.FontSize = 17;
+                totalDueValueParagraph.FontWeight = FontWeight.FromOpenTypeWeight(600);
+                totalDueValueParagraph.Margin = new Thickness(0, 20, 0, 0);
+                totalDueValueParagraph.TextAlignment = TextAlignment.Left;
+                paymentTableRowGroup.Rows.Add(CreateTableRowWithParagraph(totalDueLabelParagraph, totalDueValueParagraph));
 
 
                 // Create a Paragraph for "Total Amount"
-                Paragraph totalDueAmountLabelParagraph = new Paragraph(new Run("Customer Payment:"));
-                totalDueAmountLabelParagraph.FontSize = 20; // Increase the font size
+                Paragraph totalDueAmountLabelParagraph = new Paragraph(new Run($"Paid in {eachCustomerPayment.paymentMethod}: "));
+                totalDueAmountLabelParagraph.FontSize = 17;
+                totalDueAmountLabelParagraph.Margin = new Thickness(0, 0, 0, 0);
+                totalDueAmountLabelParagraph.FontWeight = FontWeight.FromOpenTypeWeight(600);
                 totalDueAmountLabelParagraph.TextAlignment = TextAlignment.Right;
 
                 double customerPaymentValue = eachCustomerPayment.customerPaymentTotalAmount;
                 Paragraph totalDueAmountValueParagraph = new Paragraph(new Run(customerPaymentValue.ToString("C")));
+                totalDueAmountValueParagraph.FontSize = 17;
+                totalDueAmountValueParagraph.Margin = new Thickness(0, 0, 0, 0);
+                totalDueAmountValueParagraph.FontWeight = FontWeight.FromOpenTypeWeight(600);
+                totalDueAmountValueParagraph.TextAlignment = TextAlignment.Left;
                 paymentTableRowGroup.Rows.Add(CreateTableRowWithParagraph(totalDueAmountLabelParagraph, totalDueAmountValueParagraph));
 
                 if (eachCustomerPayment.paymentMethod.Equals("Cash"))
                 {
                     // Create a Paragraph for "Change"
-                    Paragraph changeLabelParagraph = new Paragraph(new Run("Change:"));
-                    changeLabelParagraph.FontSize = 20; // Increase the font size
+                    Paragraph changeLabelParagraph = new Paragraph(new Run("Change: "));
+                    changeLabelParagraph.FontSize = 15;
+                    changeLabelParagraph.Margin = new Thickness(0, 0, 0, 0);
+                    changeLabelParagraph.FontWeight = FontWeight.FromOpenTypeWeight(600);
                     changeLabelParagraph.TextAlignment = TextAlignment.Right;
 
                     double customerChangeValue = eachCustomerPayment.customerChangeAmount;
                     Paragraph changeValueParagraph = new Paragraph(new Run(customerChangeValue.ToString("C")));
+                    changeValueParagraph.FontSize = 15;
+                    changeValueParagraph.Margin = new Thickness(0, 0, 0, 0);
+                    changeValueParagraph.FontWeight = FontWeight.FromOpenTypeWeight(600);
+                    changeValueParagraph.TextAlignment = TextAlignment.Left;
                     paymentTableRowGroup.Rows.Add(CreateTableRowWithParagraph(changeLabelParagraph, changeValueParagraph));
                 } 
                 
                 else
                 {
                     // Create a Paragraph for "Tip"
-                    Paragraph tipLabelParagraph = new Paragraph(new Run("Tip:"));
-                    tipLabelParagraph.FontSize = 20; // Increase the font size
+                    Paragraph tipLabelParagraph = new Paragraph(new Run("Tip: "));
+                    tipLabelParagraph.FontSize = 17; 
                     tipLabelParagraph.TextAlignment = TextAlignment.Right;
+                    tipLabelParagraph.FontWeight = FontWeight.FromOpenTypeWeight(600);
+                    tipLabelParagraph.Margin = new Thickness(0, 10, 0, 0);
 
                     double customerTipValue = eachCustomerPayment.tip;
                     Paragraph tipValueParagraph = new Paragraph(new Run(customerTipValue.ToString("C")));
+                    tipValueParagraph.FontSize = 17;
+                    tipValueParagraph.Margin = new Thickness(0, 10, 0, 0);
+                    tipValueParagraph.FontWeight = FontWeight.FromOpenTypeWeight(600);
+                    tipValueParagraph.TextAlignment = TextAlignment.Left;
                     paymentTableRowGroup.Rows.Add(CreateTableRowWithParagraph(tipLabelParagraph, tipValueParagraph));
                 }
 
 
                 //////////////////////////////////////////////////
 
-                // Create a Paragraph for the payment method
-                Paragraph paymentMethodParagraph = new Paragraph(new Run($"Payment Type: {_paymentMethod}"));
-                paymentMethodParagraph.FontSize = 20;
-                paymentMethodParagraph.TextAlignment = TextAlignment.Left; // Adjust alignment as needed
+/*                // Create a Paragraph for the payment method
+                Paragraph paymentMethodParagraph = new Paragraph(new Run($"Payment Type: "));
+                paymentMethodParagraph.Margin = new Thickness(0, 10, 0, 0);
+                paymentMethodParagraph.FontSize = 15;
+                paymentMethodParagraph.TextAlignment = TextAlignment.Right;
 
+                string paymentMethodValue = eachCustomerPayment.paymentMethod;
+                Paragraph paymentMethodValueParagraph = new Paragraph(new Run(paymentMethodValue));
+                paymentMethodValueParagraph.Margin = new Thickness(0, 10, 0, 0);
+                paymentMethodValueParagraph.FontSize = 15;
+                paymentMethodValueParagraph.TextAlignment = TextAlignment.Left;
                 // Add the payment method paragraph to your document
-                flowDocument.Blocks.Add(paymentMethodParagraph);
+                paymentTableRowGroup.Rows.Add(CreateTableRowWithParagraph(paymentMethodParagraph, paymentMethodValueParagraph));*/
 
                 // /*****************************
 
@@ -548,7 +586,7 @@ namespace POS_System.Pages
                 // Create a new paragraph for the "Thank You" message
                 Paragraph thankYouParagraph = new Paragraph();
                 thankYouParagraph.TextAlignment = TextAlignment.Center;
-                thankYouParagraph.FontSize = 16; // You can set the font size as you wish
+                thankYouParagraph.FontSize = 20;
                 thankYouParagraph.Inlines.Add(new Run("Thank You for dining with us!"));
                 thankYouParagraph.Margin = new Thickness(0, 10, 0, 0); // Add some space before the message if needed
 
@@ -588,6 +626,7 @@ namespace POS_System.Pages
 
             // Label cell
             TableCell labelCell = new TableCell(new Paragraph(new Run(label)));
+            labelCell.FontSize = 15;
             labelCell.TextAlignment = TextAlignment.Right;
             labelCell.BorderThickness = new Thickness(0, 0, 20, 0); // Add space on the right side
             labelCell.BorderBrush = Brushes.Transparent; // Set the border brush to transparent to hide the line
@@ -595,6 +634,7 @@ namespace POS_System.Pages
 
             // Value cell
             TableCell valueCell = new TableCell(new Paragraph(new Run(value)));
+            labelCell.FontSize = 15;
             valueCell.BorderThickness = new Thickness(0); // No column lines, only space
             row.Cells.Add(valueCell);
 
@@ -621,14 +661,18 @@ namespace POS_System.Pages
 
             // Label cell
             TableCell labelCell = new TableCell(labelParagraph);
-            labelCell.TextAlignment = TextAlignment.Right;
-            labelCell.BorderThickness = new Thickness(0, 0, 20, 0); // Add space on the right side
+            labelCell.FontSize = 15;
+            labelCell.TextAlignment = TextAlignment.Center;
+            labelCell.BorderThickness = new Thickness(0); // Add space on the right side
             labelCell.BorderBrush = Brushes.Transparent; // Set the border brush to transparent to hide the line
             row.Cells.Add(labelCell);
 
             // Value cell
             TableCell valueCell = new TableCell(valueParagraph);
-            valueCell.BorderThickness = new Thickness(0); // No column lines, only space
+            valueCell.FontSize = 15;
+            valueCell.BorderThickness = new Thickness(0); 
+            valueCell.Padding = new Thickness(20,0,0,0);
+            valueCell.TextAlignment= TextAlignment.Right;
             row.Cells.Add(valueCell);
 
             return row;
@@ -776,7 +820,7 @@ namespace POS_System.Pages
             double totalTaxAmount = 0;
             double totalOrderAmount = CalculateTotalOrderAmount();
             double taxRate = 0.05;
-            return totalTaxAmount = totalOrderAmount * taxRate;
+            return Math.Round(totalTaxAmount = totalOrderAmount * taxRate, 2);
 
 
         }
@@ -787,7 +831,7 @@ namespace POS_System.Pages
 
             double totalOrderAmount = CalculateTotalOrderAmount();
             double totalTaxAmount = CalculateTaxAmount();
-            return totalOrderAmount + totalTaxAmount;
+            return Math.Round(totalOrderAmount + totalTaxAmount, 2);
         }
 
 
