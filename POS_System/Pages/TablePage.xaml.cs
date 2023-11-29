@@ -39,6 +39,13 @@ namespace POS_System.Pages
             {
                 logout_button.Content = "Logout";
                 reset_button.Visibility = Visibility.Collapsed;
+                Image logoutImage = new Image();
+                BitmapImage bitmap = new BitmapImage();
+                bitmap.BeginInit();
+                bitmap.UriSource = new Uri("pack://application:,,,/POS_System;component/Images/Logout.png");
+                bitmap.EndInit();
+                logoutImage.Source = bitmap;
+                logout_button.Content = logoutImage;
             } 
             
             else
