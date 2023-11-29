@@ -794,7 +794,7 @@ namespace POS_System.Pages
             }
             else
             {
-                return tipAmount = GetCustomerPayment() - CalculateOrderTotalBalance();
+                return Math.Round(tipAmount = GetCustomerPayment() - CalculateOrderTotalBalance(),2);
             }
 
 
@@ -806,7 +806,7 @@ namespace POS_System.Pages
             double changeAmount = 0.0;
             if (_paymentMethod != null && _paymentMethod.Equals("Cash"))
             {
-                return changeAmount = GetCustomerPayment() - CalculateOrderTotalBalance();
+                return Math.Round(changeAmount = GetCustomerPayment() - CalculateOrderTotalBalance(), 2);
             }
             else
             {
