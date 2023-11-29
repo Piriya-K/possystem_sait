@@ -21,6 +21,7 @@ using System.Windows.Shapes;
 using System.ComponentModel;
 using System.Windows.Data;
 using POS.Models;
+using POS_System.Dialog;
 
 namespace POS_System.Pages
 {
@@ -451,6 +452,15 @@ namespace POS_System.Pages
             }
 
 
+        }
+
+        private void ChangeTableButton_Click(object sender, RoutedEventArgs e)
+        {
+            var dialog = new ChangeTableDialog();
+            dialog.ShowDialog();
+            TablePage tablePage = new TablePage();
+            this.Close();
+            tablePage.Show();
         }
 
 
