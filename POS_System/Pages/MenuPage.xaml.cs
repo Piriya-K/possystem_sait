@@ -882,7 +882,7 @@ namespace POS_System.Pages
                             MySqlCommand orderCmd = new MySqlCommand(orderSql, conn);
                             orderCmd.Parameters.AddWithValue("@tableNum", _tableNumber);
                             orderCmd.Parameters.AddWithValue("@orderTimestamp", DateTime.Now);
-                            orderCmd.Parameters.AddWithValue("@totalAmount", TotalAmount);
+                            orderCmd.Parameters.AddWithValue("@totalAmount", Math.Round(TotalAmount, 2));
                             orderCmd.Parameters.AddWithValue("@order_type", TypeTextBox.Text);
                             orderCmd.ExecuteNonQuery();
                             orderId = orderCmd.LastInsertedId;
@@ -903,12 +903,9 @@ namespace POS_System.Pages
                             }
 
                         }
+
                         else if (StatusTextBlock.Text.Equals("Occupied"))
                         {
-
-
-
-
                             string removeOrderedItemlistSql = "DELETE FROM ordered_itemlist WHERE order_id = @orderId;";
                             MySqlCommand removeOrderCmd = new MySqlCommand(removeOrderedItemlistSql, conn);
                             removeOrderCmd.Parameters.AddWithValue("@orderId", orderId);
@@ -917,7 +914,7 @@ namespace POS_System.Pages
                             string updateOrderSql = "UPDATE `order` SET order_timestamp = @orderTimestamp, total_amount = @totalAmount WHERE order_id = @orderId; ";
                             MySqlCommand updateOrderCmd = new MySqlCommand(updateOrderSql, conn);
                             updateOrderCmd.Parameters.AddWithValue("@orderTimestamp", DateTime.Now);
-                            updateOrderCmd.Parameters.AddWithValue("@totalAmount", TotalAmount);
+                            updateOrderCmd.Parameters.AddWithValue("@totalAmount", Math.Round(TotalAmount, 2));
                             updateOrderCmd.Parameters.AddWithValue("@orderId", orderId);
                             updateOrderCmd.ExecuteNonQuery();
 
@@ -933,12 +930,7 @@ namespace POS_System.Pages
                                 itemCmd.Parameters.AddWithValue("@originalItemPrice", orderedItem.origialItemPrice);
                                 itemCmd.Parameters.AddWithValue("@itemPrice", orderedItem.ItemPrice);
                                 itemCmd.ExecuteNonQuery();
-
-
                             }
-
-
-
                         }
                         MessageBox.Show("Order save successfully!");
                      // Print the receipt

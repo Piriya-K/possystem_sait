@@ -72,7 +72,19 @@
                             <TextBlock Text="Switch Table" TextWrapping="Wrap" TextAlignment="Center" Height="54" FontSize="23" Width="140"/>
                         </Button>
                         <Button x:Name="reset_button" BorderBrush="Red" BorderThickness="6" Background="Orange" Foreground="Black" Margin="0,250,0,0"  Height="90" Click="ResetTable_Click" Width="150">
-                            <TextBlock Text="Reset Table" TextWrapping="Wrap" TextAlignment="Center" Height="52" FontSize="23" Width="140"/>
+                            <Viewbox HorizontalAlignment="Center"
+                         VerticalAlignment="Center">
+                                <StackPanel Height="199">
+                                    <Image
+                       Source="pack://application:,,,/POS_System;component/Images/ResetBtn.png"
+                       Width="296" Height="111" Margin="0,20,0,0"
+                       />
+                                    <TextBlock
+                           Text="RESET" FontWeight="Bold"
+                           Height="48" Width="181"
+                                   FontSize="45" Foreground="Black"/>
+                                </StackPanel>
+                            </Viewbox>
                         </Button>
                     </StackPanel>
 
