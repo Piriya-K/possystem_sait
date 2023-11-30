@@ -884,7 +884,7 @@ namespace POS_System.Pages
                     // Print the receipt
                     if (OriginalItemsCount > orderedItems.Count || IsSavedItem() == false)
                     {
-                        PrintKitchenReceipt();
+                        PrintKitchenReceipt(orderId);
                     }
                     conn.Close();
 
@@ -902,7 +902,7 @@ namespace POS_System.Pages
         }
 
         //(Method for print bill button) print kitchen receipt
-        public void PrintKitchenReceipt()
+        public void PrintKitchenReceipt(long orderID)
         {
             // Create a FlowDocument for the kitchen receipt
             FlowDocument kitchenReceiptDocument = new FlowDocument();
@@ -917,7 +917,7 @@ namespace POS_System.Pages
             headerParagraph.Inlines.Add(new LineBreak());
             headerParagraph.Inlines.Add(new Run("Order Type: " + TypeTextBox.Text));
             headerParagraph.Inlines.Add(new LineBreak());
-            headerParagraph.Inlines.Add(new Run("Order Number: " + OrderIdTextBlock.Text));
+            headerParagraph.Inlines.Add(new Run("Order Number: " + orderID));
             headerParagraph.Inlines.Add(new LineBreak());
             headerParagraph.Inlines.Add(new Run("Date and Time: " + DateTime.Now.ToString("MMMM/dd/yyyy hh:mm")));
             headerParagraph.Inlines.Add(new LineBreak());
