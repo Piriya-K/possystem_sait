@@ -21,12 +21,12 @@
 
                         <DataGrid Name="orderGrid" ItemsSource="{Binding}" Margin="18,40,10,8" Grid.Row="1" AutoGenerateColumns="False" ColumnWidth="*">
                             <DataGrid.Columns>
-                                <DataGridTextColumn Header="Order ID" Binding="{Binding order_id}" />
-                                <DataGridTextColumn Header="Table Number" Binding="{Binding table_num}" />
-                                <DataGridTextColumn Header="Total Amount" Binding="{Binding total_amount}" />
-                                <DataGridTextColumn Header="Order Type" Binding="{Binding order_type}" />
-                                <DataGridTextColumn Header="Order Status" Binding="{Binding paid}" />
-                                <DataGridTextColumn Header="Order TimeStamp" Binding="{Binding order_timestamp}" />
+                                <DataGridTextColumn Header="Order ID" Binding="{Binding order_id}" Width="Auto"/>
+                                <DataGridTextColumn Header="Table Number" Binding="{Binding table_num}" Width="Auto" />
+                                <DataGridTextColumn Header="Total Amount" Binding="{Binding total_amount}" Width="Auto" />
+                                <DataGridTextColumn Header="Order Type" Binding="{Binding order_type}" Width="Auto" />
+                                <DataGridTextColumn Header="Order Status" Binding="{Binding paid}" Width="Auto" />
+                                <DataGridTextColumn Header="Order TimeStamp" Binding="{Binding order_timestamp}" Width="*" />
                             </DataGrid.Columns>
                         </DataGrid>
                         <TextBlock Text="Date" FontSize="17" FontWeight="Bold" RenderTransformOrigin="-5.897,-1.267" Margin="12,83,774,162"/>
@@ -109,33 +109,13 @@
                             <StackPanel Orientation="Horizontal" Width="348" Height="35">
                                 <TextBlock Text="Order Type:" VerticalAlignment="Center" FontSize="12" Height="16" Width="90"/>
                                 <ComboBox x:Name="OrderTypeComboBox" Height="16" Width="102">
-                                    <ComboBox.Resources>
-                                        <!-- ComboBoxItem Style -->
-                                        <Style TargetType="ComboBoxItem">
-                                            <Setter Property="FontSize" Value="10"/>
-                                        </Style>
-                                        <!-- ComboBox Style -->
-                                        <Style TargetType="ComboBox">
-                                            <Setter Property="FontSize" Value="8.5"/>
-                                        </Style>
-                                    </ComboBox.Resources>
-                                    <ComboBoxItem Content="Dine-In" Height="20"/>
-                                    <ComboBoxItem Content="Take-Out" Height="20"/>
+                                    <ComboBoxItem Content="Dine-In"/>
+                                    <ComboBoxItem Content="Take-Out"/>
                                 </ComboBox>
                                 <!--<TextBox x:Name="fromTableBoxFilter" Width="99" Margin="5,0" Height="17"/>-->
                                 <TextBlock Text="Order Status:" VerticalAlignment="Center" Margin="5,0,5,0" Height="19" Width="57" FontSize="10"/>
                                 <!--<TextBox x:Name="toTableBoxFilter" Width="77" Height="16"/>-->
                                 <ComboBox x:Name="OrderStatusComboBox" Height="16" Width="82">
-                                    <ComboBox.Resources>
-                                        <!-- ComboBoxItem Style -->
-                                        <Style TargetType="ComboBoxItem">
-                                            <Setter Property="FontSize" Value="10"/>
-                                        </Style>
-                                        <!-- ComboBox Style -->
-                                        <Style TargetType="ComboBox">
-                                            <Setter Property="FontSize" Value="8.5"/>
-                                        </Style>
-                                    </ComboBox.Resources>
                                     <ComboBoxItem Content="Canceled"/>
                                     <ComboBoxItem Content="Paid"/>
                                     <ComboBoxItem Content="Unpaid"/>
@@ -388,11 +368,10 @@
                             <StackPanel Orientation="Horizontal" Margin="0 10 390 0" Width="384">
                                 <TextBlock Text="Refund Method:" VerticalAlignment="Center" Width="96"/>
                                 <ComboBox Name="refundMethodFilter" Width="150">
-                                    <ComboBoxItem Content="Debit" />
-                                    <ComboBoxItem Content="Cash" />
-                                    <ComboBoxItem Content="Master Card" />
                                     <ComboBoxItem Content="Visa" />
-                                    <ComboBoxItem Content="American Express" />
+                                    <ComboBoxItem Content="Cash" />
+                                    <ComboBoxItem Content="M/C" />
+                                    <ComboBoxItem Content="Amex" />
                                 </ComboBox>
                             </StackPanel>
 
@@ -403,23 +382,24 @@
                             </StackPanel>
 
                             <!-- Refund Timestamp Filter -->
-                            <StackPanel Orientation="Horizontal" Margin="0 10 10 0" Width="390">
+                            <StackPanel Orientation="Horizontal" Margin="0 10 10 0" Width="540">
                                 <TextBlock Text="Refund Timestamp:" VerticalAlignment="Center" Width="131"/>
-                                <DatePicker Name="refundTimestampFilter" Width="168"/>
+                                <DatePicker Name="refundFromDateFilter" SelectedDateFormat="Short" Width="168"/>
+                                <DatePicker x:Name="refundToDateFilter" SelectedDateFormat="Short" Width="168"/>
                             </StackPanel>
                         </StackPanel>
 
                         <!-- DataGrid -->
                         <DataGrid Name="refundGrid" ItemsSource="{Binding}" Margin="18,56,18,0" AutoGenerateColumns="False" ColumnWidth="*" VerticalAlignment="Top" Grid.Row="2" Height="345">
                             <DataGrid.Columns>
-                                <DataGridTextColumn Header="Refund ID" Binding="{Binding refund_id}" />
-                                <DataGridTextColumn Header="Order ID" Binding="{Binding order_id}" />
+                                <DataGridTextColumn Header="Refund ID" Binding="{Binding refund_id}" Width="Auto" />
+                                <DataGridTextColumn Header="Order ID" Binding="{Binding order_id}" Width="Auto" />
                                 <DataGridTextColumn Header="Payment ID" Binding="{Binding payment_id}" />
-                                <DataGridTextColumn Header="Refund Amount" Binding="{Binding refund_amount}" />
-                                <DataGridTextColumn Header="Refund Method" Binding="{Binding refund_method}" />
-                                <DataGridTextColumn Header="Refund Reason" Binding="{Binding refund_reason}" />
-                                <DataGridTextColumn Header="User ID" Binding="{Binding user_id}" />
-                                <DataGridTextColumn Header="Refund Timestamp" Binding="{Binding refund_timestamp}" />
+                                <DataGridTextColumn Header="Refund Amount" Binding="{Binding refund_amount}" Width="Auto"/>
+                                <DataGridTextColumn Header="Refund Method" Binding="{Binding refund_method}" Width="Auto" />
+                                <DataGridTextColumn Header="Refund Reason" Binding="{Binding refund_reason}" Width="Auto" />
+                                <DataGridTextColumn Header="User ID" Binding="{Binding user_id}" Width="Auto" />
+                                <DataGridTextColumn Header="Refund Timestamp" Binding="{Binding refund_timestamp}" Width="*" />
                             </DataGrid.Columns>
                         </DataGrid>
 
