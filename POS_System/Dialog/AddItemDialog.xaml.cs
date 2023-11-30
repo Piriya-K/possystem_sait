@@ -21,7 +21,7 @@ namespace POS_System
     public partial class AddItemDialog : Window
     {
         string connectionString = "SERVER=localhost;DATABASE=pos_db;UID=root;PASSWORD=password;";
-        public int id { get; set; } // Change 'private set' to 'set'
+        public int id { get; set; }
         public string name { get; set; }
         public double price { get; set; }
         public string descripion { get; set; }
@@ -36,20 +36,16 @@ namespace POS_System
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
             id = int.Parse(IdTextBox.Text);
-            // Get the category name from the TextBox
             name = NameTextBox.Text;
             price = double.Parse(PriceTextBox.Text);
             descripion = DescriptionTextBox.Text;
             category = CategoryComboBox.Text;
-
-            // Close the dialog with a "true" result
             DialogResult = true;
             this.Close();
         }
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
-            // Close the dialog with a "false" result
             DialogResult = false;
             Close();
         }

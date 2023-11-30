@@ -24,13 +24,22 @@ namespace POS_System.Dialog
         public WelcomeDialog()
         {
             InitializeComponent();
-            this.Left = 510; 
-            this.Top = 400;  
             
         }
 
-        public WelcomeDialog(string authenticatedUsername):this()
+        public WelcomeDialog(Window parentWindow, string authenticatedUsername):this()
         {
+            if (parentWindow != null)
+            {
+                var parentCenterX = parentWindow.Left + (parentWindow.Width / 2);
+                var parentCenterY = parentWindow.Top + (parentWindow.Height / 2);
+                var dialogHalfWidth = this.Width / 2;
+                var dialogHalfHeight = this.Height / 2 ;
+
+                this.Left = parentCenterX - dialogHalfWidth;
+                this.Top = parentCenterY - dialogHalfHeight;
+            }
+
             UserIDTextBlock.Text = authenticatedUsername;
             string userTitle = "";
             if (User.id >99 &&  User.id < 200)

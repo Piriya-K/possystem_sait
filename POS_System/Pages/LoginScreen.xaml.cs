@@ -47,10 +47,17 @@ namespace POS_System.Pages
             {
                 
                 string authenticatedUsername = db.GetUsername(enteredUserId);
-
-                WelcomeDialog welcomDialog = new WelcomeDialog(authenticatedUsername);
+                loginbtn.Visibility = Visibility.Collapsed;
+                Label label = new Label();
+                label.Visibility = Visibility.Collapsed;
+                TextBox textBox = new TextBox();
+                textBox.Visibility = Visibility.Collapsed;
+                PasswordBox passwordBox = new PasswordBox();
+                passwordBox.Visibility = Visibility.Collapsed;
+                WelcomeDialog welcomDialog = new WelcomeDialog(this,authenticatedUsername);
                 if (welcomDialog.ShowDialog() == true)
                 {
+
                     int userId = int.Parse(enteredUserId);
 
                     // Only 100 to 110 admin can go to AdminManagement page
