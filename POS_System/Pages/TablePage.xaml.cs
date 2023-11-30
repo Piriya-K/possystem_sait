@@ -204,15 +204,11 @@ namespace POS_System.Pages
                         {
                             tableButton.Background = Brushes.Green;
                         } 
-                        else if (takeOutButton != null)
+                        if (takeOutButton != null)
                         {
                             takeOutButton.Background = Brushes.Green;
                         } 
-                        else
-                        {
-                            tableButton.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#383838")); ;
-                            takeOutButton.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#383838")); ;
-                        }
+
 
                     }
 
