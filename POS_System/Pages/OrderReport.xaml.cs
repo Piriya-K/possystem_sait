@@ -219,53 +219,6 @@ namespace POS_System.Pages
 
         private String FromToDateFilterOrderReport(String fromD, String untilD)
         {
-            /*            String fromToDateFilterString = "";
-
-                        String fromFormatted = "";
-                        String toFormatted = "";
-                        String fromReplace = "";
-                        String toReplace = "";
-                        String[] fromSplit;
-                        String[] toSplit;
-
-                        //input validation. if input not empty, proceed to format input string to be used in sql query
-                        if (fromD.Length > 0)
-                        {
-                            fromReplace = fromD.Replace('/', ' ');
-                            fromSplit = fromReplace.Split(' ');
-                            fromFormatted = fromSplit[2] + '-' + fromSplit[0] + '-' + fromSplit[1].ToString();
-                        }
-
-                        //input validation. if input not empty, proceed to format input string to be used in sql query
-                        if (untilD.Length > 0)
-                        {
-                            toReplace = untilD.Replace('/', ' ');
-                            toSplit = toReplace.Split(' ');
-                            toFormatted = toSplit[2] + '-' + toSplit[0] + '-' + toSplit[1].ToString();
-
-                        }
-
-                        //sql query formulation based on selected filter
-
-                        //when only the until-date is selected
-                        if (fromFormatted.Length > 0 && toFormatted.Length < 1)
-                        {
-                            fromToDateFilterString = " order_timestamp >= '" + fromFormatted + "'";
-
-                            //when only the from-date is selected
-                        }
-                        else if (toFormatted.Length > 0 && fromFormatted.Length < 1)
-                        {
-                            fromToDateFilterString = " order_timestamp <= '" + toFormatted + "' + interval 1 day";
-
-                            //when a date-range is selected
-                        }
-                        else
-                        {
-                            fromToDateFilterString = " order_timestamp between '" + fromFormatted + "' and '" + toFormatted + "' + interval 1 day";
-                        }
-
-                        return fromToDateFilterString;*/
 
             String fromFormatted = "";
             String toFormatted = "";
@@ -586,7 +539,7 @@ namespace POS_System.Pages
 
         private String FromToDateFilter(String fromD, String untilD)
         {
-            String fromToDateFilterString = "";
+            /*String fromToDateFilterString = "";
 
             String fromFormatted = "";
             String toFormatted = "";
@@ -632,7 +585,35 @@ namespace POS_System.Pages
                 fromToDateFilterString = " order_timestamp between '" + fromFormatted + "' and '" + toFormatted + "' + interval 1 day";
             }
 
-            return fromToDateFilterString;
+            return fromToDateFilterString;*/
+
+            String fromFormatted = "";
+            String toFormatted = "";
+
+            if (DateTime.TryParse(fromD, out DateTime fromDateTime))
+            {
+                fromFormatted = fromDateTime.ToString("yyyy-MM-dd HH:mm:ss");
+            }
+
+            if (DateTime.TryParse(untilD, out DateTime untilDateTime))
+            {
+                toFormatted = untilDateTime.AddDays(1).ToString("yyyy-MM-dd HH:mm:ss");
+            }
+
+            if (!string.IsNullOrEmpty(fromFormatted) && !string.IsNullOrEmpty(toFormatted))
+            {
+                return $" order_timestamp BETWEEN '{fromFormatted}' AND '{toFormatted}'";
+            }
+            else if (!string.IsNullOrEmpty(fromFormatted))
+            {
+                return $" order_timestamp >= '{fromFormatted}'";
+            }
+            else if (!string.IsNullOrEmpty(toFormatted))
+            {
+                return $" order_timestamp < '{toFormatted}'";
+            }
+
+            return "";
         }
 
         private String OrderIdFilter(String orderID)
