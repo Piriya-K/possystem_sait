@@ -78,7 +78,7 @@ namespace POS_System.Pages
 
             //it could load the page before show up
             this.DataContext = this;
-            this.Loaded += Window_Loaded; // Subscribe to the Loaded event
+            LoadCategoryData();
 
         }
 
@@ -107,15 +107,6 @@ namespace POS_System.Pages
                 LoadUnpaidOrders(tableNumber);
             }
         }
-
-        //Method for loading when Menu Page open
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            LoadCategoryData();
-
-        }
-
-
 
         //Method: Group List by customer id
         private void GroupItemList()
@@ -431,16 +422,6 @@ namespace POS_System.Pages
                     var splitOrderedItems = splitByItemPage._assignCustomerIDItems;
                     _splitType = "ByItem";
                     _numberOfBill = splitByItemPage.currentCustomerId;
-
-                    foreach (OrderedItem assignedcustomerIDItem in splitOrderedItems)
-                    {
-                        String Message = "item_name= " + assignedcustomerIDItem.item_name + "\n" +
-                                         "customer_id=" + assignedcustomerIDItem.customerID;
-                        MessageBox.Show(Message);
-                    }
-
-
-
                     GetNewSplitItemList(splitOrderedItems, _numberOfBill, _splitType);
                     Refresh();
 
@@ -554,7 +535,7 @@ namespace POS_System.Pages
             else
             {
                 PaymentWindow paymentWindow = new PaymentWindow(this, orderedItems, _tableNumber, _orderType, orderId, _status, false, _numberOfBill);
-                paymentWindow.ShowDialog();
+                paymentWindow.Show();
             }
         }
 
@@ -1106,7 +1087,7 @@ namespace POS_System.Pages
 
         private void PrintCustomerBill(ObservableCollection<OrderedItem> OrderItemcCollection)
         {
-            PrintDialog printDialog = new PrintDialog();
+            
 
 
             // Calculate GST (5% of TotalAmount)
@@ -1291,6 +1272,7 @@ namespace POS_System.Pages
                 // Create a DocumentPaginator for the FlowDocument
                 IDocumentPaginatorSource paginatorSource = flowDocument;
                 DocumentPaginator documentPaginator = paginatorSource.DocumentPaginator;
+                PrintDialog printDialog = new PrintDialog();
                 if (printDialog.ShowDialog() == true)
                 {
                     // Send the document to the printer

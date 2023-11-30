@@ -110,13 +110,13 @@ namespace POS_System.Pages
                 if (hasUnpaidOrders)
                 {
                     MenuPage menuPage = new MenuPage(tableNumber, Type, "Occupied",hasUnpaidOrders);
-                    menuPage.ShowDialog();
+                    menuPage.Show();
                 }
                 else
                 {
                     // If no unpaid orders exist, create a new order
                     MenuPage menuPage = new MenuPage(tableNumber, Type, "New Order", false);
-                    menuPage.ShowDialog();
+                    menuPage.Show();
                 }
 
                 this.Close();
