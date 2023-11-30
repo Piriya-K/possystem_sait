@@ -1,5 +1,4 @@
 ﻿using MySql.Data.MySqlClient;
-using Org.BouncyCastle.Utilities;
 using POS.Models;
 using POS_System.Models;
 using System;
@@ -9,18 +8,11 @@ using System.Data;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Xml.Linq;
-using System.Printing;
 using System.Linq;
 using System.Globalization;
-using Org.BouncyCastle.Utilities.Collections;
-using System.Data.Common;
-using System.Windows.Shapes;
 using System.ComponentModel;
 using System.Windows.Data;
-using POS.Models;
 using POS_System.Dialog;
 
 namespace POS_System.Pages
@@ -108,7 +100,6 @@ namespace POS_System.Pages
             }
         }
 
-        //Method: Group List by customer id
         private void GroupItemList()
         {
 
@@ -121,14 +112,10 @@ namespace POS_System.Pages
         //Method for refresh page: update UI after change button.
         private void Refresh()
         {
-
             TotalAmount = 0;
             GroupItemList();
 
-
         }
-
-
 
         private void LoadUnpaidOrders(string tableNumber)
         {
@@ -197,23 +184,14 @@ namespace POS_System.Pages
                         GroupItemList();
                     }
 
-
-
-
-
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show("Error loading unpaid orders: " + ex.ToString());
                 }
 
-
-
             }
         }
-
-
-
 
         private void LoadCategoryData()
         {
@@ -319,11 +297,7 @@ namespace POS_System.Pages
             conn.Close();
         }
 
-
-
-
-
-        //add item on list box
+     // add item on list box
         private void ItemButton_Click(object sender, RoutedEventArgs e)
         {
             itemClick = true;
@@ -395,7 +369,6 @@ namespace POS_System.Pages
                     return;
                 }
             }
-
 
         }
 
@@ -540,9 +513,6 @@ namespace POS_System.Pages
         }
 
         //Method: Getting each customer payment
-
-        // new cancel button Thevagi from PK
-        //Method for CancelButtonClick - By PK
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
             if (User.id >= 300)
@@ -565,7 +535,7 @@ namespace POS_System.Pages
             }
         }
 
-        //Method for CancelOrder - By PK
+        //Method for CancelOrder
         private void CancelOrder(string tableNumber)
         {
 
@@ -1014,9 +984,6 @@ namespace POS_System.Pages
                 MessageBox.Show("Order sent to Kitchen successfully!");
             }
 
-
-
-
         }
 
         //Method: Get Order Id
@@ -1087,8 +1054,6 @@ namespace POS_System.Pages
 
         private void PrintCustomerBill(ObservableCollection<OrderedItem> OrderItemcCollection)
         {
-            
-
 
             // Calculate GST (5% of TotalAmount)
             double gstRate = 0.05;  // GST rate as 5%
@@ -1097,7 +1062,7 @@ namespace POS_System.Pages
             double totalAmountWithGST = TotalAmount + gstAmount;
             int customerID = 1;
             double customerTotalAmount;
-            // Iterate through split bills
+            
 
             do
             {
@@ -1131,16 +1096,13 @@ namespace POS_System.Pages
                 // Add the "-------------------------------------------------" separator at the top
                 flowDocument.Blocks.Add(new Paragraph(new Run("-------------------------------------------------")));
 
-                ///^^^^^^good^^^^^^^^^^^
-
-                ////////order detail session!!!!
-
                 // Create a Section for the order details
                 Section orderDetailsSection = new Section();
 
                 // Table to display order details
                 Table detailsTable = new Table();
                 TableRowGroup detailTableRowGroup = new TableRowGroup();
+                
                 // Add rows for order details
                 detailTableRowGroup.Rows.Add(CreateTableRow("Date:", DateTime.Now.ToString("MMMM/dd/yyyy hh:mm")));
                 detailTableRowGroup.Rows.Add(CreateTableRow("Table:", TableNumberTextBox.Text));
@@ -1162,11 +1124,11 @@ namespace POS_System.Pages
                 dashedLineRow.Cells.Add(dashedLineCell);
                 detailTableRowGroup.Rows.Add(dashedLineRow);
 
-                ///item session
-
+              
                 // Create a TableRow for displaying items and their prices
                 TableRowGroup itemTableRowGroup = new TableRowGroup();
                 Section itemSection = new Section();
+                
                 // Add space (empty TableRow) for the gap
                 itemTableRowGroup.Rows.Add(CreateEmptyTableRow());
 
@@ -1188,21 +1150,19 @@ namespace POS_System.Pages
                     }
                 }
 
-                // Access the 'Items' collection and loop through it to add item rows.
-
-
+               
                 // Initialize the TableRowGroup
                 itemSection.Blocks.Add(itemsTable);
 
                 // Create a new TableRow for the itemsCell and add it to the tableRowGroup
                 // Add space (empty TableRow) for the gap
                 itemTableRowGroup.Rows.Add(CreateEmptyTableRow());
-                /////!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-                ///////sub total session
+                
+                // Subtotal Section
                 Table paymentTable = new Table();
                 Section paymentSection = new Section();
                 TableRowGroup paymentTableRowGroup = new TableRowGroup();
+
                 // Create a Paragraph for "Sub Total" with underline
                 Paragraph subTotalParagraph = new Paragraph(new Run("Sub Total:"));
                 subTotalParagraph.FontSize = 20; // Increase the font size
@@ -1239,7 +1199,7 @@ namespace POS_System.Pages
                 double customerTotalAmountWithGST = customerTotalAmount + customerGSTAmount;
                 Paragraph totalAmountValueParagraph = new Paragraph(new Run(customerTotalAmountWithGST.ToString("C")));
                 paymentTableRowGroup.Rows.Add(CreateTableRowWithParagraph(totalAmountLabelParagraph, totalAmountValueParagraph));
-                //////////////////////////////////////////////////
+               
 
                 detailsTable.RowGroups.Add(detailTableRowGroup);
                 itemsTable.RowGroups.Add(itemTableRowGroup);
@@ -1252,7 +1212,7 @@ namespace POS_System.Pages
                 flowDocument.Blocks.Add(orderDetailsSection);
                 flowDocument.Blocks.Add(itemSection);
                 flowDocument.Blocks.Add(paymentSection);
-                // /*****************************
+               
                 // Create a new paragraph for the "Thank You" message
                 Paragraph thankYouParagraph = new Paragraph();
                 thankYouParagraph.TextAlignment = TextAlignment.Center;
@@ -1260,14 +1220,13 @@ namespace POS_System.Pages
                 thankYouParagraph.Inlines.Add(new Run("Thank You for dining with us!"));
                 thankYouParagraph.Margin = new Thickness(0, 10, 0, 0); // Add some space before the message if needed
 
-                // Add a "-------------------------------------------------" separator before the "Thank You" message
+                
                 flowDocument.Blocks.Add(new Paragraph(new Run("-------------------------------------------------")));
 
                 // Add the "Thank You" paragraph to the FlowDocument
                 flowDocument.Blocks.Add(thankYouParagraph);
                 flowDocument.Blocks.Add(new Paragraph(new Run("-------------------------------------------------")));
 
-                //**********************************
 
                 // Create a DocumentPaginator for the FlowDocument
                 IDocumentPaginatorSource paginatorSource = flowDocument;
@@ -1293,8 +1252,8 @@ namespace POS_System.Pages
             // Label cell
             TableCell labelCell = new TableCell(new Paragraph(new Run(label)));
             labelCell.TextAlignment = TextAlignment.Right;
-            labelCell.BorderThickness = new Thickness(0, 0, 20, 0); // Add space on the right side
-            labelCell.BorderBrush = Brushes.Transparent; // Set the border brush to transparent to hide the line
+            labelCell.BorderThickness = new Thickness(0, 0, 20, 0); 
+            labelCell.BorderBrush = Brushes.Transparent; 
             row.Cells.Add(labelCell);
 
             // Value cell
@@ -1311,8 +1270,8 @@ namespace POS_System.Pages
         {
             TableRow row = new TableRow();
 
-            TableCell emptyCell = new TableCell(new Paragraph(new Run(" "))); // Add a space or empty string
-            emptyCell.ColumnSpan = 2; // Set the column span to cover both columns
+            TableCell emptyCell = new TableCell(new Paragraph(new Run(" "))); 
+            emptyCell.ColumnSpan = 2; 
 
             row.Cells.Add(emptyCell);
 
@@ -1337,13 +1296,13 @@ namespace POS_System.Pages
             // Label cell
             TableCell labelCell = new TableCell(labelParagraph);
             labelCell.TextAlignment = TextAlignment.Right;
-            labelCell.BorderThickness = new Thickness(0, 0, 20, 0); // Add space on the right side
-            labelCell.BorderBrush = Brushes.Transparent; // Set the border brush to transparent to hide the line
+            labelCell.BorderThickness = new Thickness(0, 0, 20, 0); 
+            labelCell.BorderBrush = Brushes.Transparent; 
             row.Cells.Add(labelCell);
 
             // Value cell
             TableCell valueCell = new TableCell(valueParagraph);
-            valueCell.BorderThickness = new Thickness(0); // No column lines, only space
+            valueCell.BorderThickness = new Thickness(0); 
             row.Cells.Add(valueCell);
 
             return row;

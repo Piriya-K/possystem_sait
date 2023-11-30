@@ -22,13 +22,10 @@ namespace POS_System.Pages
     {
         private ObservableCollection<OrderedItem> _eachCustomerOrderedItems = new ObservableCollection<OrderedItem>();
 
-
-
-
         public static ConcurrentDictionary<int, Payment> _eachPaymentDictionary { get; } = new ConcurrentDictionary<int, Payment>();
 
         private string connStr = "SERVER=localhost;DATABASE=pos_db;UID=root;PASSWORD=password;";
-        //getter change later!!!!!
+       
         private string _tableNumber;
         private string _orderType;
         private long _orderId;
@@ -90,9 +87,6 @@ namespace POS_System.Pages
 
 
         // Methods for get customer payment: when user type the amount, it will start from cent.
-
-        // Add a private field to store the shadow value:
-
         private long shadowValue = 0;
 
         private void CustomerPayTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
@@ -424,12 +418,7 @@ namespace POS_System.Pages
                 // Add the "-------------------------------------------------" separator at the top
                 flowDocument.Blocks.Add(new Paragraph(new Run("-------------------------------------------------")));
 
-                ///^^^^^^good^^^^^^^^^^^
-
-
-
-                ////////order detail session!!!!
-
+               
                 // Create a Section for the order details
                 Section orderDetailsSection = new Section();
 
@@ -446,17 +435,15 @@ namespace POS_System.Pages
                 TableCell dashedLineCell = new TableCell();
 
                 Paragraph dashedLineParagraph = new Paragraph(new Run("-------------------------------------------------"));
-                //dashedLineParagraph.TextAlignment = TextAlignment.Center;
                 dashedLineCell.ColumnSpan = 2;
                 dashedLineCell.Blocks.Add(dashedLineParagraph);
                 dashedLineRow.Cells.Add(dashedLineCell);
                 detailTableRowGroup.Rows.Add(dashedLineRow);
 
-                ///item session
-
                 // Create a TableRow for displaying items and their prices
                 TableRowGroup itemTableRowGroup = new TableRowGroup();
                 Section itemSection = new Section();
+                
                 // Add space (empty TableRow) for the gap
                 itemTableRowGroup.Rows.Add(CreateEmptyTableRow());
 
@@ -474,9 +461,8 @@ namespace POS_System.Pages
 
                 // Add space (empty TableRow) for the gap
                 itemTableRowGroup.Rows.Add(CreateEmptyTableRow());
-                /////!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-                ///////sub total session
+               
+                // Subtotal section
                 Table paymentTable = new Table();
                 Section paymentSection = new Section();
                 TableRowGroup paymentTableRowGroup = new TableRowGroup();
@@ -572,26 +558,6 @@ namespace POS_System.Pages
                     paymentTableRowGroup.Rows.Add(CreateTableRowWithParagraph(tipLabelParagraph, tipValueParagraph));
                 }
 
-
-                //////////////////////////////////////////////////
-
-/*                // Create a Paragraph for the payment method
-                Paragraph paymentMethodParagraph = new Paragraph(new Run($"Payment Type: "));
-                paymentMethodParagraph.Margin = new Thickness(0, 10, 0, 0);
-                paymentMethodParagraph.FontSize = 15;
-                paymentMethodParagraph.TextAlignment = TextAlignment.Right;
-
-                string paymentMethodValue = eachCustomerPayment.paymentMethod;
-                Paragraph paymentMethodValueParagraph = new Paragraph(new Run(paymentMethodValue));
-                paymentMethodValueParagraph.Margin = new Thickness(0, 10, 0, 0);
-                paymentMethodValueParagraph.FontSize = 15;
-                paymentMethodValueParagraph.TextAlignment = TextAlignment.Left;
-                // Add the payment method paragraph to your document
-                paymentTableRowGroup.Rows.Add(CreateTableRowWithParagraph(paymentMethodParagraph, paymentMethodValueParagraph));*/
-
-                // /*****************************
-
-
                 detailsTable.RowGroups.Add(detailTableRowGroup);
                 itemsTable.RowGroups.Add(itemTableRowGroup);
                 paymentTable.RowGroups.Add(paymentTableRowGroup);
@@ -603,22 +569,19 @@ namespace POS_System.Pages
                 flowDocument.Blocks.Add(orderDetailsSection);
                 flowDocument.Blocks.Add(itemSection);
                 flowDocument.Blocks.Add(paymentSection);
-                // /*****************************
+                
                 // Create a new paragraph for the "Thank You" message
                 Paragraph thankYouParagraph = new Paragraph();
                 thankYouParagraph.TextAlignment = TextAlignment.Center;
                 thankYouParagraph.FontSize = 20;
                 thankYouParagraph.Inlines.Add(new Run("Thank You!"));
-                thankYouParagraph.Margin = new Thickness(0, 10, 0, 0); // Add some space before the message if needed
+                thankYouParagraph.Margin = new Thickness(0, 10, 0, 0); 
 
-                // Add a "-------------------------------------------------" separator before the "Thank You" message
+                
                 flowDocument.Blocks.Add(new Paragraph(new Run("-------------------------------------------------")));
-
                 // Add the "Thank You" paragraph to the FlowDocument
                 flowDocument.Blocks.Add(thankYouParagraph);
                 flowDocument.Blocks.Add(new Paragraph(new Run("-------------------------------------------------")));
-
-                //**********************************
 
                 // Create a DocumentPaginator for the FlowDocument
                 IDocumentPaginatorSource paginatorSource = flowDocument;
