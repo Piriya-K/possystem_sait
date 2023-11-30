@@ -26,7 +26,7 @@
                                 <DataGridTextColumn Header="Total Amount" Binding="{Binding total_amount}" Width="Auto" />
                                 <DataGridTextColumn Header="Order Type" Binding="{Binding order_type}" Width="Auto" />
                                 <DataGridTextColumn Header="Order Status" Binding="{Binding paid}" Width="Auto" />
-                                <DataGridTextColumn Header="Order TimeStamp" Binding="{Binding order_timestamp}" Width="*" />
+                                <DataGridTextColumn Header="Date" Binding="{Binding order_timestamp}" Width="*" />
                             </DataGrid.Columns>
                         </DataGrid>
                         <TextBlock Text="Date" FontSize="17" FontWeight="Bold" RenderTransformOrigin="-5.897,-1.267" Margin="12,83,774,162"/>
@@ -174,13 +174,13 @@
 
                         <DataGrid Name="orderedItemListGrid" ItemsSource="{Binding}" Margin="18,10,18,10" Grid.Row="1" AutoGenerateColumns="False" ColumnWidth="*">
                             <DataGrid.Columns>
-                                <DataGridTextColumn Header="Order ID" Binding="{Binding order_id}" />
-                                <DataGridTextColumn Header="Category" Binding="{Binding item_category}" />
-                                <DataGridTextColumn Header="Item ID" Binding="{Binding item_id}" />
-                                <DataGridTextColumn Header="Name" Binding="{Binding item_name}" />
-                                <DataGridTextColumn Header="Quantity" Binding="{Binding quantity}" />
-                                <DataGridTextColumn Header="Price" Binding="{Binding item_price}" />
-                                <DataGridTextColumn Header="Date" Binding="{Binding order_timestamp}" />
+                                <DataGridTextColumn Header="Order ID" Binding="{Binding order_id}" Width="Auto"/>
+                                <DataGridTextColumn Header="Category" Binding="{Binding item_category}" Width="Auto"/>
+                                <DataGridTextColumn Header="Item ID" Binding="{Binding item_id}" Width="Auto"/>
+                                <DataGridTextColumn Header="Name" Binding="{Binding item_name}" Width="Auto"/>
+                                <DataGridTextColumn Header="Quantity" Binding="{Binding quantity}" Width="Auto"/>
+                                <DataGridTextColumn Header="Price" Binding="{Binding item_price}" Width="Auto"/>
+                                <DataGridTextColumn Header="Date" Binding="{Binding order_timestamp}" Width="*"/>
 
                             </DataGrid.Columns>
                         </DataGrid>
@@ -399,7 +399,7 @@
                                 <DataGridTextColumn Header="Refund Method" Binding="{Binding refund_method}" Width="Auto" />
                                 <DataGridTextColumn Header="Refund Reason" Binding="{Binding refund_reason}" Width="Auto" />
                                 <DataGridTextColumn Header="User ID" Binding="{Binding user_id}" Width="Auto" />
-                                <DataGridTextColumn Header="Refund Timestamp" Binding="{Binding refund_timestamp}" Width="*" />
+                                <DataGridTextColumn Header="Date" Binding="{Binding refund_timestamp}" Width="*" />
                             </DataGrid.Columns>
                         </DataGrid>
 
