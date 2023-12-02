@@ -47,13 +47,11 @@
 
         <!-- Manage Users -->
         <Button Grid.Row="1" 
-                HorizontalAlignment="Left" 
-                Width="256" 
                 FontSize="16" 
                 Foreground="Orange" 
                 Background="#383838" 
                 BorderBrush="Orange" 
-                Click="ManageUserButton_Click" Margin="504,165,0,482" Grid.ColumnSpan="2">
+                Click="ManageUserButton_Click" Margin="504,165,4,482" Grid.ColumnSpan="2">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
