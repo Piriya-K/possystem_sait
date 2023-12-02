@@ -51,7 +51,7 @@
                 Foreground="Orange" 
                 Background="#383838" 
                 BorderBrush="Orange" 
-                Click="ManageUserButton_Click" Margin="504,165,4,482" Grid.ColumnSpan="2">
+                Click="ManageUserButton_Click" Margin="1,165,4,482" Grid.Column="1">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
