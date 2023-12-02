@@ -88,7 +88,7 @@ namespace POS_System.Pages
             userId = User.id.ToString();
             orderId = GetOrderID(paymentId);
 
-            MessageBox.Show(orderId + ' ' + paymentId + ' ' + refundAmount + ' ' + refundMethod + ' ' + refundReason);
+            MessageBox.Show("OrderID : "+ orderId + "\n" + "Payment ID : " + paymentId + "\n" + "Refund Amount : " +refundAmount + "\n" + "Refund Method : "+refundMethod + "\n" +"Refund Reason : "+ refundReason);
             
             if (paymentId.Length < 1 || refundAmount.Length < 1 || refundMethod.Length < 1 || refundReason.Length < 1)
             {
@@ -99,8 +99,6 @@ namespace POS_System.Pages
                 MySqlConnection connection = new MySqlConnection(connectionString);
 
                 String sqlquery = "insert into pos_db.refund values (0, " + orderId + ", " + paymentId + ", " + refundAmount + ", '" + refundMethod + "', '" + refundReason + "', " + userId + ", sysdate());";
-
-                MessageBox.Show(sqlquery);
 
                 //SQL query
                 MySqlCommand cmd = new MySqlCommand(sqlquery, connection);

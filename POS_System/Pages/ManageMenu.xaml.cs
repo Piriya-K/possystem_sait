@@ -71,7 +71,6 @@ namespace POS_System.Pages
             MessageBox.Show("click delete");
             if (sender is Button button && button.CommandParameter is Item item)
             {
-                MessageBox.Show("second stage");
                 int id = item.Id;
                 string name = item.item_name;
                 double price = item.ItemPrice;
@@ -97,10 +96,8 @@ namespace POS_System.Pages
 
         private void DeleteButton_Click(Object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("click delete");
             if (sender is Button button && button.CommandParameter is Category category)
             {
-                MessageBox.Show("second stage");
                 int id = category.Id;
                 string name = category.Name;
              
@@ -146,12 +143,12 @@ namespace POS_System.Pages
 
                     if (!string.IsNullOrWhiteSpace(editedName))
                     {
-                        MessageBoxResult messageBoxResult = MessageBox.Show($"Are you sure want to edit from {name} to {editedName}?", "Delete Confirmation", MessageBoxButton.YesNo);
+                        MessageBoxResult messageBoxResult = MessageBox.Show($"Are you sure want to edit {editedName}?", "Delete Confirmation", MessageBoxButton.YesNo);
                         if (messageBoxResult == MessageBoxResult.Yes)
                         {
                             if (EditItemFromDatabase(editedId, editedName,editedprice,editedDescription,editedCategory))
                             {
-                                MessageBox.Show($"Updated from {name} to {editedName}");
+                                MessageBox.Show($"Updated Data!");
                                 itemCategoryDataGrid.Content = GetAllItems();
                             }
                             else
@@ -191,12 +188,12 @@ namespace POS_System.Pages
 
                     if (!string.IsNullOrWhiteSpace(categoryName))
                     {
-                        MessageBoxResult messageBoxResult = MessageBox.Show($"Are you sure want to edit from {name} to {categoryName}?", "Delete Confirmation", MessageBoxButton.YesNo);
+                        MessageBoxResult messageBoxResult = MessageBox.Show($"Are you sure want to edit {categoryName}?", "Delete Confirmation", MessageBoxButton.YesNo);
                         if (messageBoxResult == MessageBoxResult.Yes)
                         {
                             if (EditCategoryFromDatabase(categoryName, categoryId))
                             {
-                                MessageBox.Show($"Updated from {name} to {categoryName}");
+                                MessageBox.Show($"Updated data!");
                                 itemCategoryDataGrid.Content = GetAllCategories();
                             }
                             else

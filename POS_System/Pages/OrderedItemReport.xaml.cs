@@ -191,9 +191,6 @@ namespace POS_System.Pages
 
                 sqlquery = sqlquery + " order by 5;";
 
-                //Show the sql query string to be executed
-                MessageBox.Show(sqlquery);
-
                 //String to make connection to database
                 string connectionString = "SERVER=localhost;DATABASE=pos_db;UID=root;PASSWORD=password;";
 
