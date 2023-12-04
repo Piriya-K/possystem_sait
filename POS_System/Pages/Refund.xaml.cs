@@ -88,7 +88,7 @@ namespace POS_System.Pages
             userId = User.id.ToString();
             orderId = GetOrderID(paymentId);
 
-            MessageBox.Show("OrderID : "+ orderId + "\n" + "Payment ID : " + paymentId + "\n" + "Refund Amount : " +refundAmount + "\n" + "Refund Method : "+refundMethod + "\n" +"Refund Reason : "+ refundReason);
+            //MessageBox.Show("OrderID : "+ orderId + "\n" + "Payment ID : " + paymentId + "\n" + "Refund Amount : " +refundAmount + "\n" + "Refund Method : "+refundMethod + "\n" +"Refund Reason : "+ refundReason);
             
             if (paymentId.Length < 1 || refundAmount.Length < 1 || refundMethod.Length < 1 || refundReason.Length < 1)
             {

@@ -188,7 +188,7 @@ namespace POS_System.Pages
                     {
                         int numberOFPagmentInDictionary = _eachPaymentDictionary.Count;
                         int forConditionKey = numberOFPagmentInDictionary + 1;
-                        MessageBox.Show("numberOFPagmentInDictionary = " + _eachPaymentDictionary.Count.ToString()+ "\n" + "number of bill = "+ _numberOfBill +"\n"+ "forConditionKey = "+ forConditionKey);
+                      
 
 
                         if (numberOFPagmentInDictionary < _numberOfBill || _numberOfBill == 0)

@@ -146,8 +146,6 @@ namespace POS_System.Pages
                     MySqlConnection connection = new MySqlConnection(connectionString);
                     MySqlCommand cmd = new MySqlCommand(sqlQuery, connection);
 
-                    MessageBox.Show(sqlQuery);
-
                     // Add parameters for user inputs        
                     cmd.Parameters.AddWithValue("@fromTimestamp", fromTimestamp);
                     cmd.Parameters.AddWithValue("@untilTimestamp", untilTimestamp);
@@ -311,7 +309,6 @@ namespace POS_System.Pages
                     MySqlConnection connection = new MySqlConnection(connectionString);
                     MySqlCommand cmd = new MySqlCommand(sqlQuery, connection);
 
-                    MessageBox.Show(sqlQuery);
 
                     // Add parameters for user inputs        
                     cmd.Parameters.AddWithValue("@fromTimestamp", fromTimestamp);
@@ -448,8 +445,6 @@ namespace POS_System.Pages
 
                     MySqlConnection connection = new MySqlConnection(connectionString);
                     MySqlCommand cmd = new MySqlCommand(sqlQuery, connection);
-
-                    MessageBox.Show(sqlQuery);
 
                     // Add parameters for user inputs        
                     cmd.Parameters.AddWithValue("@fromTimestamp", fromTimestamp);
