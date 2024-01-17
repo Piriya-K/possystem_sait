@@ -1,1 +1,1 @@
-### Clone this! Not the other one.
+### Main repository: https://github.com/BiteByte-Capstone
